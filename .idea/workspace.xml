@@ -3,23 +3,33 @@
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="a451d058-cdc8-4f2c-b9be-5c2b537cc1a3" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.rspec" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.travis.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Gemfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/console" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/setup" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/mattermost/wekan/version.rb" afterDir="false" />
+    <list default="true" id="a451d058-cdc8-4f2c-b9be-5c2b537cc1a3" name="Default Changelist" comment="fix base image tag">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/mattermost_wekan.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/callback_server.rb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Ruby Module" />
+        <option value="Ruby File" />
+        <option value="Ruby Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -32,9 +42,58 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="org.jetbrains.plugins.ruby.settings.RubyActiveModuleSdkConfigurable" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\aleks\RubymineProjects\mattermost-wekan\lib" />
+      <recent name="$PROJECT_DIR$/lib" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="callback_server" type="RubyRunConfigurationType" factoryName="Ruby" temporary="true">
+      <module name="mattermost-wekan" />
+      <RUBY_RUN_CONFIG NAME="RUBY_ARGS" VALUE="" />
+      <RUBY_RUN_CONFIG NAME="WORK DIR" VALUE="$MODULE_DIR$/bin" />
+      <RUBY_RUN_CONFIG NAME="SHOULD_USE_SDK" VALUE="false" />
+      <RUBY_RUN_CONFIG NAME="ALTERN_SDK_NAME" VALUE="" />
+      <RUBY_RUN_CONFIG NAME="myPassParentEnvs" VALUE="true" />
+      <envs>
+        <env name="MATTERMOST_TOKEN" value="cremgab58inz8ekygyfwc8fszy" />
+        <env name="MATTERMOST_WEBHOOK_PATH" value="mattermost" />
+        <env name="MATTERMOST_BOT_USERNAME" value="alex-bot@centralhardware.ru" />
+        <env name="MATTERMOST_BOT_PASSWORD" value="@Ghbdtnyfcktljdfybt1" />
+        <env name="MATTERMOST_URL" value="https://mattermost.centralhardware.synology.me" />
+        <env name="WEKAN_USER_LIST" value="NMQMcP2tMbYS24hzq" />
+        <env name="MATTERMOST_USER_LIST" value="em98k4hfubf3jg9kcnpmudimcc" />
+        <env name="WEKAN_DB_URL" value="server.home:27017" />
+      </envs>
+      <EXTENSION ID="BundlerRunConfigurationExtension" bundleExecEnabled="true" />
+      <EXTENSION ID="JRubyRunConfigurationExtension" NailgunExecEnabled="false" />
+      <EXTENSION ID="RubyCoverageRunConfigurationExtension" track_test_folders="true" runner="rcov">
+        <COVERAGE_PATTERN ENABLED="true">
+          <PATTERN REGEXPS="/.rvm/" INCLUDED="false" />
+        </COVERAGE_PATTERN>
+      </EXTENSION>
+      <EXTENSION ID="org.jetbrains.plugins.ruby.rails.run.RailsRunConfigurationExtension" SCRATCH_USE_RAILS_RUNNER="false" />
+      <RUBY_RUN_CONFIG NAME="SCRIPT_PATH" VALUE="$MODULE_DIR$/lib/callback_server.rb" />
+      <RUBY_RUN_CONFIG NAME="SCRIPT_ARGS" VALUE="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Ruby.callback_server" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SpringUtil" SPRING_PRE_LOADER_OPTION="true" RAKE_SPRING_PRE_LOADER_OPTION="true" RAILS_SPRING_PRE_LOADER_OPTION="true" />
@@ -45,8 +104,141 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1602074888447</updated>
-      <workItem from="1602074889632" duration="328000" />
+      <workItem from="1602074889632" duration="6893000" />
+      <workItem from="1602129931843" duration="17667000" />
+      <workItem from="1602172158089" duration="8089000" />
+      <workItem from="1602219217208" duration="12732000" />
+      <workItem from="1602309064846" duration="1322000" />
+      <workItem from="1602473001572" duration="334000" />
+      <workItem from="1602473349313" duration="297000" />
     </task>
+    <task id="LOCAL-00001" summary="init project">
+      <created>1602075224736</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1602075224736</updated>
+    </task>
+    <task id="LOCAL-00002" summary="push mission files&#10;delete .travis.yml">
+      <created>1602075347713</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1602075347713</updated>
+    </task>
+    <task id="LOCAL-00003" summary="add simple http server for mattermost webhook">
+      <created>1602077916084</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1602077916084</updated>
+    </task>
+    <task id="LOCAL-00004" summary="update README.md">
+      <created>1602136410945</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1602136410945</updated>
+    </task>
+    <task id="LOCAL-00005" summary="handle new message, get parent id via api with token auth &#10;and get parent post data">
+      <created>1602142848762</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1602142848762</updated>
+    </task>
+    <task id="LOCAL-00006" summary="check token from mattermost">
+      <created>1602146035459</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1602146035459</updated>
+    </task>
+    <task id="LOCAL-00007" summary="extract card id from wekan-mattermost message">
+      <created>1602168038593</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1602168038593</updated>
+    </task>
+    <task id="LOCAL-00008" summary="inject comment to monga">
+      <created>1602177192039</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1602177192039</updated>
+    </task>
+    <task id="LOCAL-00009" summary="fix file names">
+      <created>1602178201527</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1602178201527</updated>
+    </task>
+    <task id="LOCAL-00010" summary="refactor">
+      <created>1602179963697</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1602179963697</updated>
+    </task>
+    <task id="LOCAL-00011" summary="add no-break space symbol to wekan comment">
+      <created>1602220190100</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1602220190100</updated>
+    </task>
+    <task id="LOCAL-00012" summary="fix comment not show in web interface">
+      <created>1602228487268</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1602228487268</updated>
+    </task>
+    <task id="LOCAL-00013" summary="skipp if message has not parent">
+      <created>1602234520511</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1602234520511</updated>
+    </task>
+    <task id="LOCAL-00014" summary="fix style guid issue&#10;make  README.md more usefull">
+      <created>1602236448254</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1602236448254</updated>
+    </task>
+    <task id="LOCAL-00015" summary="fix README.md">
+      <created>1602236565059</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1602236565059</updated>
+    </task>
+    <task id="LOCAL-00016" summary="specify version in Gemfile&#10;fix dockerfile build issue">
+      <created>1602309987471</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1602309987471</updated>
+    </task>
+    <task id="LOCAL-00017" summary="add ruby version to Gemfile">
+      <created>1602310192190</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1602310192190</updated>
+    </task>
+    <task id="LOCAL-00018" summary="fix base image tag">
+      <created>1602310247274</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1602310247274</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -62,31 +254,133 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="init project" />
+    <MESSAGE value="push mission files&#10;delete .travis.yml" />
+    <MESSAGE value="add simple http server for mattermost webhook" />
+    <MESSAGE value="update README.md" />
+    <MESSAGE value="handle new message, get parent id via api with token auth &#10;and get parent post data" />
+    <MESSAGE value="check token from mattermost" />
+    <MESSAGE value="extract card id from wekan-mattermost message" />
+    <MESSAGE value="inject comment to monga" />
+    <MESSAGE value="fix file names" />
+    <MESSAGE value="refactor" />
+    <MESSAGE value="add no-break space symbol to wekan comment" />
+    <MESSAGE value="fix comment not show in web interface" />
+    <MESSAGE value="skipp if message has not parent" />
+    <MESSAGE value="fix style guid issue&#10;make  README.md more usefull" />
+    <MESSAGE value="fix README.md" />
+    <MESSAGE value="specify version in Gemfile&#10;fix dockerfile build issue" />
+    <MESSAGE value="add ruby version to Gemfile" />
+    <MESSAGE value="fix base image tag" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix base image tag" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="419" y="174" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1602179056468">
+      <screen x="0" y="0" width="1920" height="1058" />
+    </state>
+    <state x="419" y="174" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1058@0.0.1920.1058" timestamp="1602179056468" />
     <state x="694" y="265" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1602074977077">
       <screen x="0" y="0" width="1920" height="1058" />
     </state>
     <state x="694" y="265" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1058@0.0.1920.1058" timestamp="1602074977077" />
-    <state width="1874" height="278" key="GridCell.Tab.0.bottom" timestamp="1602074917846">
+    <state x="772" y="252" key="#xdebugger.XInspectDialog" timestamp="1602167465310">
       <screen x="0" y="0" width="1920" height="1058" />
     </state>
-    <state width="1874" height="278" key="GridCell.Tab.0.bottom/0.0.1920.1058@0.0.1920.1058" timestamp="1602074917846" />
-    <state width="1874" height="278" key="GridCell.Tab.0.center" timestamp="1602074917845">
+    <state x="772" y="252" key="#xdebugger.XInspectDialog/0.0.1920.1058@0.0.1920.1058" timestamp="1602167465310" />
+    <state x="817" y="273" key="EnvironmentVariablesDialog" timestamp="1602179055237">
       <screen x="0" y="0" width="1920" height="1058" />
     </state>
-    <state width="1874" height="278" key="GridCell.Tab.0.center/0.0.1920.1058@0.0.1920.1058" timestamp="1602074917845" />
-    <state width="1874" height="278" key="GridCell.Tab.0.left" timestamp="1602074917844">
+    <state x="817" y="273" key="EnvironmentVariablesDialog/0.0.1920.1058@0.0.1920.1058" timestamp="1602179055237" />
+    <state x="743" y="274" key="FileChooserDialogImpl" timestamp="1602081422895">
       <screen x="0" y="0" width="1920" height="1058" />
     </state>
-    <state width="1874" height="278" key="GridCell.Tab.0.left/0.0.1920.1058@0.0.1920.1058" timestamp="1602074917844" />
-    <state width="1874" height="278" key="GridCell.Tab.0.right" timestamp="1602074917845">
+    <state x="743" y="274" key="FileChooserDialogImpl/0.0.1920.1058@0.0.1920.1058" timestamp="1602081422895" />
+    <state width="1877" height="282" key="GridCell.Tab.0.bottom" timestamp="1602473932318">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1602473932318" />
+    <state width="1874" height="343" key="GridCell.Tab.0.bottom/0.0.1920.1058@0.0.1920.1058" timestamp="1602309046025" />
+    <state width="1877" height="282" key="GridCell.Tab.0.center" timestamp="1602473932318">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="282" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1602473932318" />
+    <state width="1874" height="343" key="GridCell.Tab.0.center/0.0.1920.1058@0.0.1920.1058" timestamp="1602309046024" />
+    <state width="1877" height="282" key="GridCell.Tab.0.left" timestamp="1602473932318">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="282" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1602473932318" />
+    <state width="1874" height="343" key="GridCell.Tab.0.left/0.0.1920.1058@0.0.1920.1058" timestamp="1602309046024" />
+    <state width="1877" height="282" key="GridCell.Tab.0.right" timestamp="1602473932318">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1602473932318" />
+    <state width="1874" height="343" key="GridCell.Tab.0.right/0.0.1920.1058@0.0.1920.1058" timestamp="1602309046024" />
+    <state width="1874" height="343" key="GridCell.Tab.1.bottom" timestamp="1602309046026">
       <screen x="0" y="0" width="1920" height="1058" />
     </state>
-    <state width="1874" height="278" key="GridCell.Tab.0.right/0.0.1920.1058@0.0.1920.1058" timestamp="1602074917845" />
+    <state width="1874" height="343" key="GridCell.Tab.1.bottom/0.0.1920.1058@0.0.1920.1058" timestamp="1602309046026" />
+    <state width="1874" height="343" key="GridCell.Tab.1.center" timestamp="1602309046025">
+      <screen x="0" y="0" width="1920" height="1058" />
+    </state>
+    <state width="1874" height="343" key="GridCell.Tab.1.center/0.0.1920.1058@0.0.1920.1058" timestamp="1602309046025" />
+    <state width="1874" height="343" key="GridCell.Tab.1.left" timestamp="1602309046025">
+      <screen x="0" y="0" width="1920" height="1058" />
+    </state>
+    <state width="1874" height="343" key="GridCell.Tab.1.left/0.0.1920.1058@0.0.1920.1058" timestamp="1602309046025" />
+    <state width="1874" height="343" key="GridCell.Tab.1.right" timestamp="1602309046025">
+      <screen x="0" y="0" width="1920" height="1058" />
+    </state>
+    <state width="1874" height="343" key="GridCell.Tab.1.right/0.0.1920.1058@0.0.1920.1058" timestamp="1602309046025" />
+    <state x="543" y="263" width="832" height="545" key="IDE.errors.dialog" timestamp="1602309145581">
+      <screen x="0" y="0" width="1920" height="1058" />
+    </state>
+    <state x="543" y="263" width="832" height="545" key="IDE.errors.dialog/0.0.1920.1058@0.0.1920.1058" timestamp="1602309145581" />
+    <state x="457" y="148" key="SettingsEditor" timestamp="1602473106035">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="457" y="148" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1602473106035" />
+    <state x="457" y="151" key="SettingsEditor/0.0.1920.1058@0.0.1920.1058" timestamp="1602309488073" />
+    <state x="556" y="252" key="Vcs.Push.Dialog.v2" timestamp="1602310248667">
+      <screen x="0" y="0" width="1920" height="1058" />
+    </state>
+    <state x="556" y="252" key="Vcs.Push.Dialog.v2/0.0.1920.1058@0.0.1920.1058" timestamp="1602310248667" />
+    <state x="774" y="156" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1602174530568">
+      <screen x="0" y="0" width="1920" height="1058" />
+    </state>
+    <state x="774" y="156" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1920.1058@0.0.1920.1058" timestamp="1602174530568" />
     <state x="765" y="428" key="git4idea.remote.GitConfigureRemotesDialog" timestamp="1602075216218">
       <screen x="0" y="0" width="1920" height="1058" />
     </state>
     <state x="765" y="428" key="git4idea.remote.GitConfigureRemotesDialog/0.0.1920.1058@0.0.1920.1058" timestamp="1602075216218" />
+    <state x="623" y="227" width="672" height="678" key="search.everywhere.popup" timestamp="1602139398646">
+      <screen x="0" y="0" width="1920" height="1058" />
+    </state>
+    <state x="623" y="227" width="672" height="678" key="search.everywhere.popup/0.0.1920.1058@0.0.1920.1058" timestamp="1602139398646" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="ruby-line">
+          <url>file://$PROJECT_DIR$/lib/mongodb.rb</url>
+          <line>26</line>
+          <properties myBlockOrdinal="-1">
+            <option name="block-ordinal" value="-1" />
+          </properties>
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="Net::HTTPOK" memberName="@body" />
+      </pinned-members>
+    </pin-to-top-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/mattermost_wekan@mattermost_wekan.rcov" NAME="mattermost_wekan Coverage Results" MODIFIED="1602235290952" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/bin" MODULE_NAME="mattermost-wekan" />
+    <SUITE FILE_PATH="coverage/mattermost_wekan@callback_server.rcov" NAME="callback_server Coverage Results" MODIFIED="1602473570698" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/bin" MODULE_NAME="mattermost-wekan" />
   </component>
 </project>

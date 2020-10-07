@@ -1,20 +1,39 @@
 # Mattermost::Wekan
 
+simple ruby bot for interact with [wekan-mattermost](https://github.com/lunatic-cat/wekan-mattermost)
+
+just comment wekan-mattermost message and it automataic add to the related wekan card
+
 ## Installation
 
 ```bash
 docker build -t mattermost-wekan .
 ```
 
-And then execute:
-
-```bash
-docker run --name mattermost-wekan mattermost-wekan 
-```
-
 ## Usage
 
-TODO: Write usage instructions here
+```yaml
+version: "3"
+services:
+  mattermost-wekan:
+    image: mattermost-wekan
+    environment:
+      MATTERMOST_TOKEN: "" # token giving after create mattermost outgoing webhook
+      MATTERMOST_WEBHOOK_PATH: "" # path to callback 
+      MATTERMOST_BOT_USERNAME: "" # some mattermost user username
+      MATTERMOST_BOT_PASSWORD: "" # some mattermost user password
+      MATTERMOST_URL: "" 
+      WEKAN_DB_URL: "" # example: localhost:27017
+      WEKAN_USER_LIST: "" # wekan user_ids with  space separated 
+      MATTERMOST_USER_LIST: "" # maattermost user_ids with space separated
+```
+
+you need to:
+
+1. create mattermost user
+1. create mattermost outgoing webhook (more simply use via reverse proxy)
+1. expose wekan-db port or add mattermost-wekan container to the wekan docker network
+1. if all okay you see 'token successfully retrieve' 
 
 ## Development
 

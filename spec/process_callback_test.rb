@@ -15,6 +15,4 @@ class HelloWorldTest < Test::Unit::TestCase
   def test_it_says_hello_world
     get '/'
   end
-
-
 end

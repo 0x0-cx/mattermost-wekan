@@ -2,27 +2,27 @@ class Config
   class << Config
 
     def mattermost_token
-      ENV['MATTERMOST_TOKEN']
+      ENV['MATTERMOST_TOKEN'] || raise('environment variable not set')
     end
 
     def mattermost_webhook_path
-      ENV['MATTERMOST_WEBHOOK_PATH']
+      ENV['MATTERMOST_WEBHOOK_PATH'] || raise('environment variable not set')
     end
 
     def mattermost_bot_username
-      ENV['MATTERMOST_BOT_USERNAME']
+      ENV['MATTERMOST_BOT_USERNAME'] || raise('environment variable not set')
     end
 
     def mattermost_bot_password
-      ENV['MATTERMOST_BOT_PASSWORD']
+      ENV['MATTERMOST_BOT_PASSWORD'] || raise('environment variable not set')
     end
 
     def mattermost_url
-      ENV['MATTERMOST_URL']
+      ENV['MATTERMOST_URL'] || raise('environment variable not set')
     end
 
     def wekan_db_url
-      ENV['WEKAN_DB_URL']
+      ENV['WEKAN_DB_URL'] || raise('environment variable not set')
     end
 
     def user_map

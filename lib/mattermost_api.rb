@@ -1,6 +1,6 @@
 require 'logger'
 
-require './../lib/http'
+require_relative 'http'
 
 class MattermostApi
   class << MattermostApi

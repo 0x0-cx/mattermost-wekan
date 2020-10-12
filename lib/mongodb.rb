@@ -2,7 +2,7 @@ require 'mongo'
 require 'date'
 require 'securerandom'
 
-require './../lib/config'
+require_relative 'config'
 
 class Mongodb
 

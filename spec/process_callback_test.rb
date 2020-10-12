@@ -1,7 +1,19 @@
-require 'rspec/autorun'
+ENV['APP_ENV'] = 'test'
 
-describe 'test callback processing' do
-  it 'add comment from callback to mongodb' do
-    expect(1 + 1).to eq(2)
+require 'test/unit'
+require 'rack/test'
+
+require_relative './../lib/callback_server'
+
+class HelloWorldTest < Test::Unit::TestCase
+  include Rack::Test::Methods
+
+  def app
+    Sinatra::Application
   end
+
+  def test_it_says_hello_world
+    get '/'
+  end
+
 end

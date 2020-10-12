@@ -14,11 +14,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a451d058-cdc8-4f2c-b9be-5c2b537cc1a3" name="Default Changelist" comment="fix base image tag">
-      <change afterPath="$PROJECT_DIR$/spec/process_callback_test.rb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/spec/spec_helper.rb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/mattermost-wekan.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/mattermost-wekan.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Gemfile" beforeDir="false" afterPath="$PROJECT_DIR$/Gemfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/callback_server.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/callback_server.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/http.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/http.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/mattermost_api.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/mattermost_api.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/message_parser.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/message_parser.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/mongodb.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/mongodb.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spec/process_callback_test.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/process_callback_test.rb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,6 +52,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/spec/process_callback_test.rb" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -62,7 +68,7 @@
       <recent name="$PROJECT_DIR$/lib" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Test::Unit/Shoulda/Minitest.Unnamed">
     <configuration name="callback_server" type="RubyRunConfigurationType" factoryName="Ruby" temporary="true">
       <module name="mattermost-wekan" />
       <RUBY_RUN_CONFIG NAME="RUBY_ARGS" VALUE="" />
@@ -92,6 +98,37 @@
       <RUBY_RUN_CONFIG NAME="SCRIPT_ARGS" VALUE="" />
       <method v="2" />
     </configuration>
+    <configuration name="Unnamed" type="TestUnitRunConfigurationType" factoryName="Test::Unit/Shoulda/Minitest" nameIsGenerated="true">
+      <module name="mattermost-wekan" />
+      <predefined_log_file enabled="true" id="RUBY_TESTUNIT" />
+      <RTEST_RUN_CONFIG_SETTINGS_ID NAME="RUBY_ARGS" VALUE="" />
+      <RTEST_RUN_CONFIG_SETTINGS_ID NAME="WORK DIR" VALUE="" />
+      <RTEST_RUN_CONFIG_SETTINGS_ID NAME="SHOULD_USE_SDK" VALUE="false" />
+      <RTEST_RUN_CONFIG_SETTINGS_ID NAME="ALTERN_SDK_NAME" VALUE="" />
+      <RTEST_RUN_CONFIG_SETTINGS_ID NAME="myPassParentEnvs" VALUE="true" />
+      <EXTENSION ID="BundlerRunConfigurationExtension" bundleExecEnabled="false" />
+      <EXTENSION ID="JRubyRunConfigurationExtension" NailgunExecEnabled="false" />
+      <EXTENSION ID="RubyCoverageRunConfigurationExtension" track_test_folders="true" runner="rcov">
+        <COVERAGE_PATTERN ENABLED="true">
+          <PATTERN REGEXPS="/.rvm/" INCLUDED="false" />
+        </COVERAGE_PATTERN>
+      </EXTENSION>
+      <EXTENSION ID="org.jetbrains.plugins.ruby.rails.run.RailsRunConfigurationExtension" SCRATCH_USE_RAILS_RUNNER="false" />
+      <RTEST_RUN_CONFIG_SETTINGS_ID NAME="TESTS_FOLDER_PATH" VALUE="" />
+      <RTEST_RUN_CONFIG_SETTINGS_ID NAME="TEST_SCRIPT_PATH" VALUE="$MODULE_DIR$/spec/process_callback_test.rb" />
+      <RTEST_RUN_CONFIG_SETTINGS_ID NAME="TEST_FILE_MASK" VALUE="" />
+      <RTEST_RUN_CONFIG_SETTINGS_ID NAME="TEST_METHOD_NAME" VALUE="" />
+      <RTEST_RUN_CONFIG_SETTINGS_ID NAME="TEST_TEST_TYPE" VALUE="TEST_SCRIPT" />
+      <RTEST_RUN_CONFIG_SETTINGS_ID NAME="DRB" VALUE="false" />
+      <RTEST_RUN_CONFIG_SETTINGS_ID NAME="ZEUS" VALUE="false" />
+      <RTEST_RUN_CONFIG_SETTINGS_ID NAME="SPRING" VALUE="false" />
+      <RTEST_RUN_CONFIG_SETTINGS_ID NAME="RUNNER_OPTIONS" VALUE="" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Ruby.callback_server" />
+      <item itemvalue="Test::Unit/Shoulda/Minitest.Unnamed" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Ruby.callback_server" />
@@ -282,10 +319,10 @@
     <option name="LAST_COMMIT_MESSAGE" value="fix base image tag" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="419" y="174" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1602179056468">
+    <state x="419" y="174" width="1081" height="729" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1602499517360">
       <screen x="0" y="0" width="1920" height="1058" />
     </state>
-    <state x="419" y="174" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1058@0.0.1920.1058" timestamp="1602179056468" />
+    <state x="419" y="174" width="1081" height="729" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1058@0.0.1920.1058" timestamp="1602499517360" />
     <state x="694" y="265" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1602074977077">
       <screen x="0" y="0" width="1920" height="1058" />
     </state>
@@ -298,46 +335,62 @@
       <screen x="0" y="0" width="1920" height="1058" />
     </state>
     <state x="817" y="273" key="EnvironmentVariablesDialog/0.0.1920.1058@0.0.1920.1058" timestamp="1602179055237" />
-    <state x="743" y="274" key="FileChooserDialogImpl" timestamp="1602081422895">
+    <state x="743" y="274" key="FileChooserDialogImpl" timestamp="1602499516152">
       <screen x="0" y="0" width="1920" height="1058" />
     </state>
-    <state x="743" y="274" key="FileChooserDialogImpl/0.0.1920.1058@0.0.1920.1058" timestamp="1602081422895" />
-    <state width="1877" height="282" key="GridCell.Tab.0.bottom" timestamp="1602473932318">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="743" y="274" key="FileChooserDialogImpl/0.0.1920.1058@0.0.1920.1058" timestamp="1602499516152" />
+    <state width="1874" height="278" key="GridCell.Tab.0.bottom" timestamp="1602516799700">
+      <screen x="0" y="0" width="1920" height="1058" />
     </state>
     <state width="1877" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1602473932318" />
-    <state width="1874" height="343" key="GridCell.Tab.0.bottom/0.0.1920.1058@0.0.1920.1058" timestamp="1602309046025" />
-    <state width="1877" height="282" key="GridCell.Tab.0.center" timestamp="1602473932318">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1874" height="278" key="GridCell.Tab.0.bottom/0.0.1920.1058@0.0.1920.1058" timestamp="1602516799700" />
+    <state width="1874" height="278" key="GridCell.Tab.0.center" timestamp="1602516799699">
+      <screen x="0" y="0" width="1920" height="1058" />
     </state>
     <state width="1877" height="282" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1602473932318" />
-    <state width="1874" height="343" key="GridCell.Tab.0.center/0.0.1920.1058@0.0.1920.1058" timestamp="1602309046024" />
-    <state width="1877" height="282" key="GridCell.Tab.0.left" timestamp="1602473932318">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1874" height="278" key="GridCell.Tab.0.center/0.0.1920.1058@0.0.1920.1058" timestamp="1602516799699" />
+    <state width="1874" height="278" key="GridCell.Tab.0.left" timestamp="1602516799699">
+      <screen x="0" y="0" width="1920" height="1058" />
     </state>
     <state width="1877" height="282" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1602473932318" />
-    <state width="1874" height="343" key="GridCell.Tab.0.left/0.0.1920.1058@0.0.1920.1058" timestamp="1602309046024" />
-    <state width="1877" height="282" key="GridCell.Tab.0.right" timestamp="1602473932318">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1874" height="278" key="GridCell.Tab.0.left/0.0.1920.1058@0.0.1920.1058" timestamp="1602516799699" />
+    <state width="1874" height="278" key="GridCell.Tab.0.right" timestamp="1602516799699">
+      <screen x="0" y="0" width="1920" height="1058" />
     </state>
     <state width="1877" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1602473932318" />
-    <state width="1874" height="343" key="GridCell.Tab.0.right/0.0.1920.1058@0.0.1920.1058" timestamp="1602309046024" />
-    <state width="1874" height="343" key="GridCell.Tab.1.bottom" timestamp="1602309046026">
+    <state width="1874" height="278" key="GridCell.Tab.0.right/0.0.1920.1058@0.0.1920.1058" timestamp="1602516799699" />
+    <state width="1874" height="343" key="GridCell.Tab.1.bottom" timestamp="1602501348690">
       <screen x="0" y="0" width="1920" height="1058" />
     </state>
-    <state width="1874" height="343" key="GridCell.Tab.1.bottom/0.0.1920.1058@0.0.1920.1058" timestamp="1602309046026" />
-    <state width="1874" height="343" key="GridCell.Tab.1.center" timestamp="1602309046025">
+    <state width="1874" height="343" key="GridCell.Tab.1.bottom/0.0.1920.1058@0.0.1920.1058" timestamp="1602501348690" />
+    <state width="1874" height="343" key="GridCell.Tab.1.center" timestamp="1602501348690">
       <screen x="0" y="0" width="1920" height="1058" />
     </state>
-    <state width="1874" height="343" key="GridCell.Tab.1.center/0.0.1920.1058@0.0.1920.1058" timestamp="1602309046025" />
-    <state width="1874" height="343" key="GridCell.Tab.1.left" timestamp="1602309046025">
+    <state width="1874" height="343" key="GridCell.Tab.1.center/0.0.1920.1058@0.0.1920.1058" timestamp="1602501348690" />
+    <state width="1874" height="343" key="GridCell.Tab.1.left" timestamp="1602501348689">
       <screen x="0" y="0" width="1920" height="1058" />
     </state>
-    <state width="1874" height="343" key="GridCell.Tab.1.left/0.0.1920.1058@0.0.1920.1058" timestamp="1602309046025" />
-    <state width="1874" height="343" key="GridCell.Tab.1.right" timestamp="1602309046025">
+    <state width="1874" height="343" key="GridCell.Tab.1.left/0.0.1920.1058@0.0.1920.1058" timestamp="1602501348689" />
+    <state width="1874" height="343" key="GridCell.Tab.1.right" timestamp="1602501348690">
       <screen x="0" y="0" width="1920" height="1058" />
     </state>
-    <state width="1874" height="343" key="GridCell.Tab.1.right/0.0.1920.1058@0.0.1920.1058" timestamp="1602309046025" />
+    <state width="1874" height="343" key="GridCell.Tab.1.right/0.0.1920.1058@0.0.1920.1058" timestamp="1602501348690" />
+    <state width="1874" height="343" key="GridCell.Tab.2.bottom" timestamp="1602501348692">
+      <screen x="0" y="0" width="1920" height="1058" />
+    </state>
+    <state width="1874" height="343" key="GridCell.Tab.2.bottom/0.0.1920.1058@0.0.1920.1058" timestamp="1602501348692" />
+    <state width="1874" height="343" key="GridCell.Tab.2.center" timestamp="1602501348692">
+      <screen x="0" y="0" width="1920" height="1058" />
+    </state>
+    <state width="1874" height="343" key="GridCell.Tab.2.center/0.0.1920.1058@0.0.1920.1058" timestamp="1602501348692" />
+    <state width="1874" height="343" key="GridCell.Tab.2.left" timestamp="1602501348692">
+      <screen x="0" y="0" width="1920" height="1058" />
+    </state>
+    <state width="1874" height="343" key="GridCell.Tab.2.left/0.0.1920.1058@0.0.1920.1058" timestamp="1602501348692" />
+    <state width="1874" height="343" key="GridCell.Tab.2.right" timestamp="1602501348692">
+      <screen x="0" y="0" width="1920" height="1058" />
+    </state>
+    <state width="1874" height="343" key="GridCell.Tab.2.right/0.0.1920.1058@0.0.1920.1058" timestamp="1602501348692" />
     <state x="543" y="263" width="832" height="545" key="IDE.errors.dialog" timestamp="1602309145581">
       <screen x="0" y="0" width="1920" height="1058" />
     </state>
@@ -375,6 +428,22 @@
           </properties>
           <option name="timeStamp" value="10" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="ruby-line">
+          <url>file://$PROJECT_DIR$/lib/callback_server.rb</url>
+          <line>21</line>
+          <properties myBlockOrdinal="-1">
+            <option name="block-ordinal" value="-1" />
+          </properties>
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="ruby-line">
+          <url>file://$PROJECT_DIR$/lib/http.rb</url>
+          <line>7</line>
+          <properties myBlockOrdinal="-1">
+            <option name="block-ordinal" value="-1" />
+          </properties>
+          <option name="timeStamp" value="13" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
     <pin-to-top-manager>
@@ -384,7 +453,11 @@
     </pin-to-top-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/mattermost_wekan@callback_server.rcov" NAME="callback_server Coverage Results" MODIFIED="1602473570698" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/bin" MODULE_NAME="mattermost-wekan" />
+    <SUITE FILE_PATH="coverage/mattermost_wekan@process_callback_test.rcov" NAME="process_callback_test Coverage Results" MODIFIED="1602494776335" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="mattermost-wekan" />
+    <SUITE FILE_PATH="coverage/mattermost_wekan@Unnamed.rcov" NAME="Unnamed Coverage Results" MODIFIED="1602516795615" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" MODULE_NAME="mattermost-wekan" />
+    <SUITE FILE_PATH="coverage/mattermost_wekan@callback_server.rcov" NAME="callback_server Coverage Results" MODIFIED="1602501498881" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/bin" MODULE_NAME="mattermost-wekan" />
+    <SUITE FILE_PATH="coverage/mattermost_wekan@integraated_test.rcov" NAME="integraated test Coverage Results" MODIFIED="1602493175371" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" MODULE_NAME="mattermost-wekan" />
+    <SUITE FILE_PATH="coverage/mattermost_wekan@test_callback_processing.rcov" NAME="test callback processing Coverage Results" MODIFIED="1602487277025" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="mattermost-wekan" />
     <SUITE FILE_PATH="coverage/mattermost_wekan@mattermost_wekan.rcov" NAME="mattermost_wekan Coverage Results" MODIFIED="1602235290952" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/bin" MODULE_NAME="mattermost-wekan" />
   </component>
 </project>

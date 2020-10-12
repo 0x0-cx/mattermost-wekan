@@ -1,6 +1,8 @@
 from ruby:2.7.1-alpine
 
-RUN apk update && apk upgrade && apk add --update alpine-sdk && \
+RUN apk update &&
+    apk upgrade &&
+    apk add --update alpine-sdk && \
     apk add --no-cache make
 
 RUN mkdir /usr/src/app

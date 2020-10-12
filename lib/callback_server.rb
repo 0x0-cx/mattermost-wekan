@@ -2,10 +2,10 @@ require 'logger'
 require 'sinatra'
 require 'json'
 
-require './../lib/config'
-require './../lib/mattermost_api'
-require './../lib/message_parser'
-require './../lib/mongodb'
+require_relative 'config'
+require_relative 'mattermost_api'
+require_relative 'message_parser'
+require_relative 'mongodb'
 
 logger = Logger.new(STDOUT, Logger::DEBUG)
 
@@ -18,7 +18,7 @@ MattermostApi.authorize
 mongodb = Mongodb.new
 mongodb.connect
 
-po  st "/#{Config.mattermost_webhook_path}" do
+post "/#{Config.mattermost_webhook_path}" do
   data = JSON.parse(request.body.read.to_s)
   if data['token'] == Config.mattermost_token
     if MattermostApi.parent? data['post_id']

@@ -1,0 +1,19 @@
+image: "ruby:2.7.1"
+
+
+
+cache:
+  paths:
+    - vendor/ruby
+
+before_script:
+  - ruby -v  
+  - bundle install -j $(nproc) --path vendor  
+
+rubocop:
+  script:
+    - rubocop
+
+rspec:
+  script:
+    - bundle exec rspec

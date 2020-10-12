@@ -14,8 +14,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a451d058-cdc8-4f2c-b9be-5c2b537cc1a3" name="Default Changelist" comment="fix base image tag">
+      <change afterPath="$PROJECT_DIR$/spec/process_callback_test.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/spec/spec_helper.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/mattermost-wekan.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/mattermost-wekan.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/mattermost_wekan.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/callback_server.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gemfile" beforeDir="false" afterPath="$PROJECT_DIR$/Gemfile" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,8 +29,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Ruby Module" />
-        <option value="Ruby File" />
         <option value="Ruby Class" />
+        <option value="Ruby File" />
       </list>
     </option>
   </component>
@@ -111,6 +114,7 @@
       <workItem from="1602309064846" duration="1322000" />
       <workItem from="1602473001572" duration="334000" />
       <workItem from="1602473349313" duration="297000" />
+      <workItem from="1602483826374" duration="1231000" />
     </task>
     <task id="LOCAL-00001" summary="init project">
       <created>1602075224736</created>
@@ -380,7 +384,7 @@
     </pin-to-top-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/mattermost_wekan@mattermost_wekan.rcov" NAME="mattermost_wekan Coverage Results" MODIFIED="1602235290952" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/bin" MODULE_NAME="mattermost-wekan" />
     <SUITE FILE_PATH="coverage/mattermost_wekan@callback_server.rcov" NAME="callback_server Coverage Results" MODIFIED="1602473570698" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/bin" MODULE_NAME="mattermost-wekan" />
+    <SUITE FILE_PATH="coverage/mattermost_wekan@mattermost_wekan.rcov" NAME="mattermost_wekan Coverage Results" MODIFIED="1602235290952" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/bin" MODULE_NAME="mattermost-wekan" />
   </component>
 </project>

@@ -13,7 +13,7 @@ class MattermostApi
         password: Config.mattermost_bot_password
       }
       response = Http.post("#{Config.mattermost_url}/#{mattermost_api_path}/users/login",  body.to_json)
-      @token = response['Token']
+      @token = response['Token'] || raise('could not get token')
       logger.debug 'successfully retrieve token'
     end
 

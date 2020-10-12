@@ -1,18 +1,28 @@
 ENV['APP_ENV'] = 'test'
 
-require 'test/unit'
+require 'webmock/rspec'
 require 'rack/test'
 
+require_relative 'spec_helper'
 require_relative './../lib/callback_server'
+require_relative './../lib/config'
 
-class HelloWorldTest < Test::Unit::TestCase
+RSpec.describe 'Sinatra App' do
   include Rack::Test::Methods
 
   def app
-    Sinatra::Application
+    init_mock
+    CallbackServer.new
   end
 
-  def test_it_says_hello_world
-    get '/'
+  it 'displays home page' do
+    post '/'
   end
+
+  def init_mock
+    WebMock.disable_net_connect!(allow_localhost: false)
+    WebMock.stub_request(:post, "#{Config.mattermost_url}/api/v4/users/login")
+           .to_return(status: 200, body: { Token: 'sdf' }.to_json)
+  end
+
 end

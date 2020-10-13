@@ -10,4 +10,4 @@ ADD . /usr/src/app/
 WORKDIR /usr/src/app/
 RUN bundler install
 
-cmd ["ruby", "./bin/mattermost_wekan.rb"]
+cmd ["ruby", "./lib/mattermost_wekan.rb"]

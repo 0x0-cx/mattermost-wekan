@@ -1,14 +1,15 @@
 image: "ruby:2.7.1"
 
-
+variables:
+  TEST: "HELLO WORLD"
 
 cache:
   paths:
     - vendor/ruby
 
 before_script:
-  - ruby -v  
-  - bundle install -j $(nproc) --path vendor  
+  - ruby -v
+  - bundle install -j $(nproc) --path vendor
 
 rspec:
   script:

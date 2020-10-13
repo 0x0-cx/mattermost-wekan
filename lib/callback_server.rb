@@ -25,7 +25,6 @@ class CallbackServer < Sinatra::Base
 
   post "/#{Config.mattermost_webhook_path}" do
     data = JSON.parse(request.body.read.to_s)
-    puts data.to_s
     if data['token'] == Config.mattermost_token
       if MattermostApi.parent? data['post_id']
         parent_post_text = MattermostApi.get_parent_post_text(data['post_id'])

@@ -33,7 +33,12 @@ class MessageParser
     end
 
     def extract_url(message)
-      (URI.extract message).last
+      urls = (URI.extract message)
+      url = nil
+      if urls.length == 1
+        url = urls.last if urls.last.start_with? Config.mattermost_url
+      end
+      url
     end
 
   end

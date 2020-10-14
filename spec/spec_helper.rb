@@ -13,7 +13,7 @@ class Mongo::Client
     end
 
     def insert_one(element)
-      @@written == true
+      @@written = true
       unless element[:text].nil?
         if !element[:boardId].eql?('12') ||
            !element[:cardId].eql?('13') ||
@@ -42,6 +42,11 @@ class Mongo::Client
       @@written
     end
 
+    def reset!
+      @@correct = true
+      @@written = false
+    end
+
   end
 
   def self.new(*)
@@ -52,6 +57,7 @@ class Mongo::Client
     }
   end
 end
+
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure

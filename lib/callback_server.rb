@@ -9,11 +9,6 @@ require_relative 'mongodb'
 
 class CallbackServer < Sinatra::Base
 
-
-  def initialize
-    MattermostApi.authorize
-  end
-
   logger = Logger.new(STDOUT, Logger::DEBUG)
 
   logger.debug 'start mattermost-wekan'

@@ -9,12 +9,8 @@ class Config
       ENV['MATTERMOST_WEBHOOK_PATH'] || raise('environment variable not set')
     end
 
-    def mattermost_bot_username
-      ENV['MATTERMOST_BOT_USERNAME'] || raise('environment variable not set')
-    end
-
-    def mattermost_bot_password
-      ENV['MATTERMOST_BOT_PASSWORD'] || raise('environment variable not set')
+    def mattermost_bot_token
+      ENV['MATTERMOST_BOT_TOKEN'] || raise('environment variable not set')
     end
 
     def mattermost_url

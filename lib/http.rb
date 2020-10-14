@@ -4,20 +4,6 @@ require 'uri'
 class Http
   class << Http
 
-    def post(url, body)
-      uri = URI.parse(url)
-      header = {
-        'Content-Type': 'text/json'
-      }
-      http = Net::HTTP.new(uri.host, uri.port)
-      http.use_ssl = true
-      # TODO: какие то локальные траблы с reverse proxy иначе не работает
-      http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-      request = Net::HTTP::Post.new(uri.request_uri, header)
-      request.body = body
-      http.request(request)
-    end
-
     def get(url, token)
       uri = URI.parse(url)
       http = Net::HTTP.new(uri.host, uri.port)

@@ -3,7 +3,6 @@ require 'uri'
 
 class Http
   class << Http
-
     def get(url, token)
       uri = URI.parse(url)
       http = Net::HTTP.new(uri.host, uri.port)
@@ -13,6 +12,5 @@ class Http
       request['Authorization'] = "Bearer #{token}"
       http.request(request)
     end
-
   end
 end

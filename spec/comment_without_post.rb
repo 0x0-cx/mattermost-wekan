@@ -34,5 +34,4 @@ RSpec.describe 'Sinatra app' do
     client = Mongo::Client.new
     expect(client[:cards].written?).to eq(false)
   end
-
 end

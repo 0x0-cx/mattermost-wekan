@@ -43,7 +43,4 @@ RSpec.describe 'Sinatra app' do
     expect(client[:cards].correct?).to eq(true)
     expect(client[:cards].written?).to eq(true)
   end
-
-
 end
-

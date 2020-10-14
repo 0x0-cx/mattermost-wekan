@@ -2,9 +2,7 @@ require 'bundler/setup'
 Bundler.require
 
 class Mongo::Client
-
   class MockCollection
-
     @@correct = true
     @@written = false
 
@@ -46,7 +44,6 @@ class Mongo::Client
       @@correct = true
       @@written = false
     end
-
   end
 
   def self.new(*)
@@ -58,7 +55,6 @@ class Mongo::Client
   end
 end
 
-
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
   config.example_status_persistence_file_path = '.rspec_status'
@@ -69,6 +65,4 @@ RSpec.configure do |config|
   config.expect_with :rspec do |c|
     c.syntax = :expect
   end
-
 end
-

@@ -2,7 +2,6 @@ require 'uri'
 
 class MessageParser
   class << MessageParser
-
     def find_card_id(message)
       url = extract_url message
       return nil if url.nil?
@@ -40,6 +39,5 @@ class MessageParser
       end
       url
     end
-
   end
 end

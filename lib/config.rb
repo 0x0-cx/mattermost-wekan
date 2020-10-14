@@ -1,6 +1,5 @@
 class Config
   class << Config
-
     def mattermost_token
       ENV['MATTERMOST_TOKEN'] || raise('environment variable not set')
     end
@@ -34,6 +33,5 @@ class Config
     def mattermost_user_list
       ENV['MATTERMOST_USER_LIST'].split ' '
     end
-
   end
 end

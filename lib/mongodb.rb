@@ -5,7 +5,6 @@ require 'securerandom'
 require_relative 'config'
 
 class Mongodb
-
   @client
 
   def connect
@@ -38,5 +37,4 @@ class Mongodb
     }
     @client[:activity].insert_one(activity)
   end
-
 end

@@ -1,5 +1,5 @@
 require 'bundler/setup'
-require 'process_callback_test'
+Bundler.require
 
 class Mongo::Client
   def self.new(*)

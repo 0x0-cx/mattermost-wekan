@@ -2,13 +2,17 @@ require 'bundler/setup'
 Bundler.require
 
 class Mongo::Client
+  class MockCollection
+    def find(*); [{ 'listId' => 1, 'swimlaneId' => 2 }]; end
+    def insert_one(*); end
+  end
+
   def self.new(*)
-    client = {
-        cards: OpenStruct.new(find: [{ 'listId' => 1, 'swimlaneId' => 2 }]),
-        activity: OpenStruct.new,
-        card_comments: OpenStruct.new
+    {
+      cards: MockCollection.new,
+      activity: MockCollection.new,
+      card_comments: MockCollection.new
     }
-    client
   end
 end
 

@@ -22,11 +22,17 @@ class CallbackServer < Sinatra::Base
   end
 
   post "/#{Config.mattermost_webhook_path}" do
-    data = JSON.parse(request.body.read.to_s)
+    body = request.body.read.to_s
+    if body.empty?
+      body 'https://docs.mattermost.com/developer/webhooks-outgoing.html'
+      halt 200
+    end
+    data = JSON.parse(body)
     if data['token'] == Config.mattermost_token
       if MattermostApi.parent? data['post_id']
         parent_post_text = MattermostApi.get_parent_post_text(data['post_id'])
         card_id = MessageParser.find_card_id parent_post_text
+        halt 200 if card_id.nil?
         board_id = MessageParser.find_board_id parent_post_text
         mongodb.post_comment(card_id, board_id, data['text'], data['user_id'])
       end

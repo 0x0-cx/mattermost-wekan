@@ -14,7 +14,7 @@ class MattermostApi
 
     def parent?(post_id)
       body = Http.get("#{Config.mattermost_url}/api/v4/posts/#{post_id}", Config.mattermost_bot_token)
-      parent_post_id = JSON.parse(body.body)['parent_id']
+      parent_post_id = JSON.parse(body.body)['parent_id'] || ''
       !parent_post_id.empty?
     end
 

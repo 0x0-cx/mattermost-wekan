@@ -5,6 +5,8 @@ class MessageParser
 
     def find_card_id(message)
       url = extract_url message
+      return nil if url.nil?
+
       extract_card_id url
     end
 

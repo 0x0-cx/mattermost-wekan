@@ -5,6 +5,8 @@ require_relative 'spec_helper'
 require_relative './../lib/callback_server'
 require_relative './../lib/config'
 
+class Mongodb; def self.new(*); Mongodb.new;end;end
+
 RSpec.describe 'test sinatra callback handler' do
   include Rack::Test::Methods
 
@@ -14,11 +16,6 @@ RSpec.describe 'test sinatra callback handler' do
 
   before :each do
     WebMock.disable_net_connect!(allow_localhost: false)
-    WebMock.stub_request(:post, "#{Config.mattermost_url}/api/v4/users/login")
-           .to_return(status: 200, headers: {
-                        content_type: 'application/json',
-                        token: 'sdf'
-                      })
     WebMock.stub_request(:get, "#{Config.mattermost_url}/api/v4/posts/1")
            .to_return(status: 200, body: { parent_id: '-1' }.to_json, headers: {
                         content_type: 'application/json'
@@ -30,11 +27,6 @@ RSpec.describe 'test sinatra callback handler' do
                       headers: {
                         content_type: 'application/json'
                       })
-    client = {
-      cards: double(find: [{ 'lastId' => 1, 'swimlaneId' => 2 }]),
-      activity: double,
-      card_comments: double }
-    Mongo::Client.stub(:new) { client }
 
   end
 

@@ -2,9 +2,41 @@ require 'bundler/setup'
 Bundler.require
 
 class Mongo::Client
+
   class MockCollection
-    def find(*); [{ 'listId' => 1, 'swimlaneId' => 2 }]; end
-    def insert_one(*); end
+
+    @@correct = true
+
+    def find(*)
+      [{ 'listId' => 1, 'swimlaneId' => 2 }]
+    end
+
+    def insert_one(element)
+      unless element[:text].nil?
+        if !element[:boardId].eql?('12') ||
+           !element[:cardId].eql?('13') ||
+           !element[:userId].eql?('1')  ||
+           !element[:text].eql?('text text')
+
+          @@correct = false
+        end
+      end
+      unless element[:activityType].nil?
+        if !element[:userId].eql?('1') ||
+           !element[:activityType].eql?('addComment') ||
+           !element[:boardId].eql?('12') ||
+           !element[:cardId].eql?('13')
+           # !element[:listId].eql?(1) ||
+           # !element[:swimlaneId].eql?('2')
+          @@correct = false
+        end
+      end
+    end
+
+    def correct?
+      @@correct
+    end
+
   end
 
   def self.new(*)

@@ -5,9 +5,8 @@ require_relative 'spec_helper'
 require_relative './../lib/callback_server'
 require_relative './../lib/config'
 
-RSpec.describe 'S inatra app' do
+RSpec.describe 'Sinatra app' do
   include Rack::Test::Methods
-
 
   def app
     CallbackServer.new
@@ -29,14 +28,17 @@ RSpec.describe 'S inatra app' do
 
   end
 
-  it 'displays home page' do
+  it 'post callback with text' do
     post "/#{Config.mattermost_webhook_path}",
          {
            token: Config.mattermost_token,
-           post_id: '1'
+           post_id: '1',
+           text: 'text text',
+           user_id: '1'
          }.to_json,
          content_type: 'application/json'
-
+    client = Mongo::Client.new
+    expect(client[:cards].correct?).to eq(true)
   end
 
 end

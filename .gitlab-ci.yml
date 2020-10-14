@@ -15,7 +15,7 @@ cache:
 
 rubocop:
   script:
-    - rubocop -a
+    - rubocop -A
 
 
 before_script:

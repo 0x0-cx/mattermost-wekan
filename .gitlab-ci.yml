@@ -13,6 +13,11 @@ cache:
   paths:
     - vendor/ruby
 
+rubocop:
+  script:
+    - rubocop
+
+
 before_script:
   - ruby -v
   - bundle install -j $(nproc) --path vendor

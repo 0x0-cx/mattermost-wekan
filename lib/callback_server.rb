@@ -16,7 +16,10 @@ class CallbackServer < Sinatra::Base
   set :bind, '0.0.0.0'
 
   mongodb = Mongodb.new
-  mongodb.connect
+
+  configure do
+    mongodb.connect
+  end
 
   post "/#{Config.mattermost_webhook_path}" do
     data = JSON.parse(request.body.read.to_s)

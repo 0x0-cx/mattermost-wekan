@@ -5,15 +5,9 @@ require_relative 'spec_helper'
 require_relative './../lib/callback_server'
 require_relative './../lib/config'
 
-RSpec.describe 'SSinatra app' do
+RSpec.describe 'S inatra app' do
   include Rack::Test::Methods
 
-  class Mongo::Client
-    def self.new(*)
-      client = { cards: double(find: [{ 'listId' => 1, 'swimlaneId' => 2 }]), activity: double, card_comments: double }
-      client
-    end
-  end
 
   def app
     CallbackServer.new

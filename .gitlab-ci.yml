@@ -25,4 +25,4 @@ before_script:
 
 rspec:
   script:
-    - bundle exec rspec spec/process_callback_test.rb
+    - bundle exec rspec spec/*

@@ -8,6 +8,11 @@ module Mongo
     class MockCollection
       include Singleton
 
+      def initialize
+        @correct = true
+        @written = false
+      end
+
       def find(*)
         [{ 'listId' => 1, 'swimlaneId' => 2 }]
       end

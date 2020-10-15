@@ -4,7 +4,6 @@ require 'webmock'
 
 class TestUtils
   class << TestUtils
-
     include WebMock::API
 
     WebMock.enable!

@@ -33,7 +33,6 @@ RSpec.describe 'Sinatra app' do
          content_type: 'application/json'
     expect(last_response).to be_ok
     client = Mongo::Client.new
-    expect(client[:cards].correct?).to eq(true)
     expect(client[:cards].written?).to eq(false)
   end
 
@@ -43,7 +42,6 @@ RSpec.describe 'Sinatra app' do
          content_type: 'application/json'
     expect(last_response).to be_ok
     client = Mongo::Client.new
-    expect(client[:cards].correct?).to eq(true)
     expect(client[:cards].written?).to eq(false)
   end
 end

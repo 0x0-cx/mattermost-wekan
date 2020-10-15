@@ -30,6 +30,7 @@ RSpec.describe 'Sinatra app' do
   end
 
   it 'comment on wekan-mattermost post' do
+    client = Mongo::Client.new
     post "/#{Config.mattermost_webhook_path}",
          {
            token: Config.mattermost_token,
@@ -39,7 +40,6 @@ RSpec.describe 'Sinatra app' do
          }.to_json,
          content_type: 'application/json'
     expect(last_response).to be_ok
-    client = Mongo::Client.new
     expect(client[:cards].correct?).to eq(true)
     expect(client[:cards].written?).to eq(true)
   end

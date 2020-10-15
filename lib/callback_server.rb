@@ -33,7 +33,7 @@ class CallbackServer < Sinatra::Base
         card_id = MessageParser.find_card_id parent_post_text
         halt 200 if card_id.nil?
         board_id = MessageParser.find_board_id parent_post_text
-        mongodb.post_comment(card_id, board_id, data['text'], data['user_id'])
+        mongodb.insert_comment(card_id, board_id, data['text'], data['user_id'])
       end
     else
       logger.warn 'wrong token. may be anyone try to hack bot'

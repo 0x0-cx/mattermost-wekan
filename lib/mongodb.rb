@@ -5,14 +5,19 @@ require 'securerandom'
 require_relative 'config'
 
 class Mongodb
-  @client
-
   def connect
     @client = Mongo::Client.new([Config.wekan_db_url], database: 'wekan', direct_connection: true)
   end
 
-  def post_comment(card_id, board_id, comment, mattermost_user_id)
+  def insert_comment(card_id, board_id, comment, mattermost_user_id)
     comment_id = SecureRandom.uuid[0..16]
+    insert_card_comments(comment_id, comment, board_id, card_id, mattermost_user_id)
+    insert_activity(card_id, board_id, mattermost_user_id, comment_id)
+  end
+
+  private
+
+  def insert_card_comments(comment_id, comment, board_id, card_id, mattermost_user_id)
     comment = {
       _id: comment_id,
       text: comment,
@@ -23,6 +28,9 @@ class Mongodb
       userId: Config.user_map[mattermost_user_id]
     }
     @client[:card_comments].insert_one comment
+  end
+
+  def insert_activity(card_id, board_id, mattermost_user_id, comment_id)
     card = @client[:cards].find(_id: card_id).first
     activity = {
       userId: Config.user_map[mattermost_user_id],

@@ -3,3 +3,6 @@ Documentation:
 
 Layout/LineLength:
   Max: 120
+
+AllCops:
+  NewCops: enable

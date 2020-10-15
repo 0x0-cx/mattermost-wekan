@@ -13,6 +13,7 @@ RSpec.describe 'Sinatra app' do
   end
 
   before :each do
+    WebMock.disable_net_connect!(allow_localhost: false)
     WebMock.stub_request(:get, "#{Config.mattermost_url}/api/v4/posts/3")
            .to_return(status: 200, body: { smth: '-2' }.to_json, headers: {
                         content_type: 'application/json'

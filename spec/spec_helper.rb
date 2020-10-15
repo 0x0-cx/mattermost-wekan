@@ -3,6 +3,7 @@ Bundler.require
 
 class Mongo::Client
   class MockCollection
+    # rubocop:disable Style/ClassVars
     @@correct = true
     @@written = false
 

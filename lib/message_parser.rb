@@ -35,7 +35,7 @@ class MessageParser
       urls = (URI.extract message)
       url = nil
       if urls.length == 1
-        url = urls.last if urls.last.start_with? Config.mattermost_url
+        url = urls.last if urls.last.include? 'wekan'
       end
       url
     end

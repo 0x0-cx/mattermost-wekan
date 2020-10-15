@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'mongo'
 require 'date'
 require 'securerandom'

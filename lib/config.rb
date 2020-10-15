@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Config
   class << Config
     def mattermost_token

@@ -1,9 +1,12 @@
+# frozen_string_literal: true
+
 require 'webmock/rspec'
 require 'rack/test'
 
 require_relative 'spec_helper'
 require_relative './../lib/callback_server'
 require_relative './../lib/config'
+require_relative 'test_utils'
 
 RSpec.describe 'Sinatra app' do
   include Rack::Test::Methods
@@ -14,41 +17,19 @@ RSpec.describe 'Sinatra app' do
 
   before :each do
     WebMock.disable_net_connect!(allow_localhost: false)
-    WebMock.stub_request(:get, "#{Config.mattermost_url}/api/v4/posts/4")
-           .to_return(status: 200, body: { parent_id: '-4' }.to_json, headers: {
-                        content_type: 'application/json'
-                      })
-    WebMock.stub_request(:get, "#{Config.mattermost_url}/api/v4/posts/-4")
-           .to_return(status: 200, body: {
-             message: 'Какой то текст [https://vk.com/12/sdf/13](sdf) ещ'
-           }.to_json,
-                      headers: {
-                        content_type: 'application/json'
-                      })
+    TestUtils.mock_mattermost_post_endpoint '4', parent_id: '-4'
+    TestUtils.mock_mattermost_post_endpoint '-4', message: 'Какой то текст [https://vk.com/12/sdf/13](sdf) ещ'
 
-    WebMock.stub_request(:get, "#{Config.mattermost_url}/api/v4/posts/5")
-           .to_return(status: 200, body: { parent_id: '-5' }.to_json, headers: {
-                        content_type: 'application/json'
-                      })
-    WebMock.stub_request(:get, "#{Config.mattermost_url}/api/v4/posts/-5")
-           .to_return(status: 200, body: {
-             message: 'Какой то текст [https://vk.com/12/sdf/13](sdf) https://youtube.com/12/sdf/13 ещ'
-           }.to_json,
-                      headers: {
-                        content_type: 'application/json'
-                      })
+    TestUtils.mock_mattermost_post_endpoint '5', parent_id: '-5'
+    TestUtils.mock_mattermost_post_endpoint '-5', message:
+        'Какой то текст [https://vk.com/12/sdf/13](sdf) https://youtube.com/12/sdf/13 ещ'
 
     Mongo::Client.new[:cards].reset!
   end
 
   it 'comment on post with non wekan url' do
     post "/#{Config.mattermost_webhook_path}",
-         {
-           token: Config.mattermost_token,
-           post_id: '4',
-           text: 'text text',
-           user_id: '1'
-         }.to_json,
+         TestUtils.callback_body('4'),
          content_type: 'application/json'
     expect(last_response).to be_ok
     client = Mongo::Client.new
@@ -58,12 +39,7 @@ RSpec.describe 'Sinatra app' do
 
   it 'comment on post with two or more url' do
     post "/#{Config.mattermost_webhook_path}",
-         {
-           token: Config.mattermost_token,
-           post_id: '5',
-           text: 'text text',
-           user_id: '1'
-         }.to_json,
+         TestUtils.callback_body('5'),
          content_type: 'application/json'
     expect(last_response).to be_ok
     client = Mongo::Client.new

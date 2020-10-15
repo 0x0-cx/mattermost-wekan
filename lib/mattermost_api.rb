@@ -24,7 +24,7 @@ class MattermostApi
     end
 
     def logger
-      Logger.new(STDOUT, Logger::DEBUG)
+      Logger.new($stdout, Logger::DEBUG)
     end
   end
 end

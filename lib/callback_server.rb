@@ -10,7 +10,7 @@ require_relative 'message_parser'
 require_relative 'mongodb'
 
 class CallbackServer < Sinatra::Base
-  logger = Logger.new(STDOUT, Logger::DEBUG)
+  logger = Logger.new($stdout, Logger::DEBUG)
 
   logger.debug 'start mattermost-wekan'
 

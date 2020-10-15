@@ -35,11 +35,7 @@ class MessageParser
 
     def extract_url(message)
       urls = (URI.extract message)
-      url = nil
-      if urls.length == 1
-        url = urls.last if urls.last.include? 'wekan'
-      end
-      url
+      urls.last if urls.length == 1 && urls.last.include?('wekan')
     end
   end
 end

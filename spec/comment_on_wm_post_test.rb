@@ -24,7 +24,7 @@ RSpec.describe 'Sinatra app' do
 
   it 'comment on wekan-mattermost post' do
     post "/#{Config.mattermost_webhook_path}",
-         TestUtils.callback_body('1'),
+         TestUtils.callback_body(1),
          content_type: 'application/json'
     expect(last_response).to be_ok
     client = Mongo::Client.new

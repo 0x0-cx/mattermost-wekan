@@ -1,5 +1,14 @@
+# frozen_string_literal: true
+
+require 'webmock'
+
 class TestUtils
   class << TestUtils
+
+    include WebMock::API
+
+    WebMock.enable!
+
     def callback_body(post_id)
       {
         token: Config.mattermost_token,

@@ -28,18 +28,14 @@ RSpec.describe 'Sinatra app' do
   end
 
   it 'comment on post with non wekan url' do
-    post "/#{Config.mattermost_webhook_path}",
-         TestUtils.callback_body('4'),
-         content_type: 'application/json'
+    post "/#{Config.mattermost_webhook_path}", TestUtils.callback_body('4'), content_type: 'application/json'
     expect(last_response).to be_ok
     client = Mongo::Client.new
     expect(client[:cards].written?).to eq(false)
   end
 
   it 'comment on post with two or more url' do
-    post "/#{Config.mattermost_webhook_path}",
-         TestUtils.callback_body('5'),
-         content_type: 'application/json'
+    post "/#{Config.mattermost_webhook_path}", TestUtils.callback_body('5'), content_type: 'application/json'
     expect(last_response).to be_ok
     client = Mongo::Client.new
     expect(client[:cards].written?).to eq(false)

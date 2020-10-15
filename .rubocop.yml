@@ -6,3 +6,6 @@ Layout/LineLength:
 
 AllCops:
   NewCops: enable
+
+Metrics/MethodLength:
+  CountAsOne: ['array', 'heredoc', 'hash']

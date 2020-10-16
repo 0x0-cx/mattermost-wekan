@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Config
-  def initialize(env=ENV)
+  def initialize(env = ENV)
     @env = env
   end
 

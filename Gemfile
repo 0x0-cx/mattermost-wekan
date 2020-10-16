@@ -16,4 +16,6 @@ group 'run' do
   gem 'sinatra', '2.1.0'
 end
 
-gem 'rubocop', '0.93.1'
+group 'ci' do
+  gem 'rubocop', '0.93.1'
+end

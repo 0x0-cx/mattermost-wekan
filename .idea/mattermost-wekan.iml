@@ -44,6 +44,6 @@
     <orderEntry type="library" scope="PROVIDED" name="sinatra (v2.1.0, ruby-2.7.1-p83) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="tilt (v2.0.10, ruby-2.7.1-p83) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="unicode-display_width (v1.7.0, ruby-2.7.1-p83) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="webmock (v3.6.2, ruby-2.7.1-p83) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="webmock (v3.9.2, ruby-2.7.1-p83) [gem]" level="application" />
   </component>
 </module>

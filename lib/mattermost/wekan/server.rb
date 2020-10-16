@@ -8,6 +8,7 @@ require_relative '../../config'
 require_relative 'mattermost_api'
 require_relative 'message'
 require_relative 'mongodb'
+require_relative 'message'
 
 class Server < Sinatra::Base
   logger = Logger.new($stdout, Logger::DEBUG)
@@ -22,23 +23,22 @@ class Server < Sinatra::Base
     mongodb.connect
   end
 
-  post "/#{Config.mattermost_webhook_path}" do
-    body = request.body.read.to_s
-    if body.empty?
-      body 'https://docs.mattermost.com/developer/webhooks-outgoing.html'
-      halt 200
+  post '/' do
+    request_body = request.body.read.to_s
+    if request_body.empty?
+      body 'Server work but you must configure mattermost outgoing hooks to this server.
+             more info https://docs.mattermost.com/developer/webhooks-outgoing.html'
+      halt(400)
     end
-    data = JSON.parse(body)
+    message = Message.new(request_body)
     if data['token'] == Config.mattermost_token
-      if MattermostApi.parent? data['post_id']
-        parent_post_text = MattermostApi.get_parent_post_text(data['post_id'])
-        card_id = Message.find_card_id parent_post_text
-        halt 200 if card_id.nil?
-        board_id = Message.find_board_id parent_post_text
-        mongodb.insert_comment(card_id, board_id, data['text'], data['user_id'])
+      if message.has_parent_wekan_link?
+        mongodb.insert_comment(message.card_id, message.board_id, data['text'], data['user_id'])
       end
     else
       logger.warn 'wrong token. may be anyone try to hack bot'
+      body 'token from request header not equal with configured mattermost outgoing webhook token'
+      halt(400)
     end
   end
 end

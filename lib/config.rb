@@ -9,10 +9,6 @@ class Config
     env.fetch('MATTERMOST_TOKEN')
   end
 
-  def mattermost_webhook_path
-    env.fetch('MATTERMOST_WEBHOOK_PATH')
-  end
-
   def mattermost_bot_token
     env.fetch('MATTERMOST_BOT_TOKEN')
   end

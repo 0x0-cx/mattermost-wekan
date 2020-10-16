@@ -1,39 +1,41 @@
 # frozen_string_literal: true
 
 class Config
-  class << Config
-    def mattermost_token
-      ENV['MATTERMOST_TOKEN'] || raise('environment variable not set')
-    end
+  def initialize(env=ENV)
+    @env = env
+  end
 
-    def mattermost_webhook_path
-      ENV['MATTERMOST_WEBHOOK_PATH'] || raise('environment variable not set')
-    end
+  def mattermost_token
+    env.fetch('MATTERMOST_TOKEN')
+  end
 
-    def mattermost_bot_token
-      ENV['MATTERMOST_BOT_TOKEN'] || raise('environment variable not set')
-    end
+  def mattermost_webhook_path
+    env.fetch('MATTERMOST_WEBHOOK_PATH')
+  end
 
-    def mattermost_url
-      ENV['MATTERMOST_URL'] || raise('environment variable not set')
-    end
+  def mattermost_bot_token
+    env.fetch('MATTERMOST_BOT_TOKEN')
+  end
 
-    def wekan_db_url
-      ENV['WEKAN_DB_URL'] || raise('environment variable not set')
-    end
+  def mattermost_url
+    env.fetch('MATTERMOST_URL')
+  end
 
-    def user_map
-      Hash[mattermost_user_list.zip(wekan_user_list)]
-    end
+  def wekan_db_url
+    env.fetch('WEKAN_DB_URL')
+  end
 
-    private
+  def user_map
+    Hash[mattermost_user_list.zip(wekan_user_list)]
+  end
 
-    def wekan_user_list
-      ENV['WEKAN_USER_LIST'].split ' '
-    end
+  private
 
-    def mattermost_user_list
-      ENV['MATTERMOST_USER_LIST'].split ' '
-    end
+  def wekan_user_list
+    env.fetch('WEKAN_USER_LIST').split(' ')
+  end
+
+  def mattermost_user_list
+    env.fetch('MATTERMOST_USER_LIST').split(' ')
   end
 end

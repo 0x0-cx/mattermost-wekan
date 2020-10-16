@@ -1,15 +1,22 @@
-from ruby:2.7.1-alpine
+from ruby:2.7.1-alpine as build
 
-RUN mkdir /usr/src/app
-ADD . /usr/src/app/
-WORKDIR /usr/src/app/
+WORKDIR /app
+
+COPY Gemfile* ./
 
 RUN apk update && \
     apk upgrade && \
     apk add --no-cache --update alpine-sdk && \
     apk add --no-cache make && \
     bundler config set without 'test' 'ci'&& \
-    bundler install
+    bundler install --path=vendor/bundle
+
+
+from ruby:2.7.1-alpine
+
+COPY --from=build /app /app
+ADD . /app
+WORKDIR /app
 
 EXPOSE 4567
 

@@ -13,4 +13,4 @@ RUN apk update && \
 
 EXPOSE 4567
 
-CMD ["ruby", "./lib/mattermost/wekan/server.rb"]
+CMD ["rackup"]

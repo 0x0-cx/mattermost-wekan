@@ -30,7 +30,7 @@ class Comment
       activityType: 'addComment',
       boardId: @board_id,
       cardId: @card_id,
-      commentId: comment_id,
+      commentId: @comment_id,
       listId: list_id,
       swimlaneId: swimlane_id,
       createdAt: @date_time,

@@ -4,11 +4,12 @@ require 'uri'
 require 'faraday'
 
 class Message
-  def initialize(data)
+  def initialize(data, bot_token)
     parent_message = get_parent_post_text(data['post_id'])
     @text = data['text']
     @user_id = data['user_id']
     @token = data['token']
+    @bot_token = bot_token
     @board_id = find_board_id(parent_message)
     @card_id = find_card_id(parent_message)
   end
@@ -23,9 +24,9 @@ class Message
 
   def get_parent_post_text(post_id)
     config = Config.new
-    body = get("#{config.mattermost_url}/api/v4/posts/#{post_id}", config.mattermost_bot_token)
+    body = get("#{config.mattermost_url}/api/v4/posts/#{post_id}", @bot_token)
     parent_post_id = JSON.parse(body)['parent_id']
-    body = get("#{config.mattermost_url}/api/v4/posts/#{parent_post_id}", config.mattermost_bot_token)
+    body = get("#{config.mattermost_url}/api/v4/posts/#{parent_post_id}", @bot_token)
     JSON.parse(body)['message']
   end
 

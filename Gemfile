@@ -10,6 +10,7 @@ group 'test' do
 end
 
 group 'run' do
+  gem 'faraday', '1.0.1'
   gem 'mongo', '2.14.0.rc1'
   gem 'puma', '5.0.2'
   gem 'securerandom', '0.1.0'

@@ -8,7 +8,6 @@ require_relative '../../config'
 require_relative 'mattermost_api'
 require_relative 'message'
 require_relative 'mongodb'
-require_relative 'message'
 
 class Server < Sinatra::Base
   logger = Logger.new($stdout, Logger::DEBUG)

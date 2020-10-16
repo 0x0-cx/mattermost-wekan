@@ -20,10 +20,14 @@ class Message
   private
 
   def get_parent_post_text(post_id)
-    body = Http.get("#{Config.mattermost_url}/api/v4/posts/#{post_id}", Config.mattermost_bot_token)
-    parent_post_id = JSON.parse(body.body)['parent_id']
-    body = Http.get("#{Config.mattermost_url}/api/v4/posts/#{parent_post_id}", Config.mattermost_bot_token)
-    JSON.parse(body.body)['message']
+    body = get("#{Config.mattermost_url}/api/v4/posts/#{post_id}", Config.mattermost_bot_token)
+    parent_post_id = JSON.parse(body)['parent_id']
+    body = get("#{Config.mattermost_url}/api/v4/posts/#{parent_post_id}", Config.mattermost_bot_token)
+    JSON.parse(body)['message']
+  end
+
+  def get(url, token)
+    Faraday.get(url, header: { 'Authorization' => "Bearer #{token}" }).body
   end
 
   def find_card_id(message)

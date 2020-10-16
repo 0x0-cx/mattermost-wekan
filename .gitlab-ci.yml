@@ -20,9 +20,8 @@ rubocop:
 
 before_script:
   - ruby -v
-  - gem install rubocop
   - bundle install -j $(nproc) --path vendor
 
 rspec:
   script:
-    - bundle exec rspec spec/*
+    - bundle exec rspec spec

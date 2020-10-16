@@ -5,7 +5,6 @@ require 'sinatra'
 require 'json'
 
 require_relative '../../config'
-require_relative 'mattermost_api'
 require_relative 'message'
 require_relative 'mongodb'
 
@@ -17,6 +16,7 @@ class Server < Sinatra::Base
   set :bind, '0.0.0.0'
 
   mongodb = Mongodb.new
+  config = Config.new
 
   configure do
     mongodb.connect
@@ -30,9 +30,11 @@ class Server < Sinatra::Base
       halt(400)
     end
     message = Message.new(request_body)
-    if data['token'] == Config.mattermost_token
-      if message.has_parent_wekan_link?
-        mongodb.insert_comment(message.card_id, message.board_id, data['text'], data['user_id'])
+    if message.token == config.mattermost_token
+      if message.parent_wekan_link?
+        mongodb.insert_comment(message.card_id, message.board_id, message.text, message.user_id)
+      else
+        halt(200)
       end
     else
       logger.warn 'wrong token. may be anyone try to hack bot'

@@ -1,28 +1,31 @@
 # frozen_string_literal: true
 
 require 'uri'
+require 'faraday'
 
 class Message
   def initialize(data)
     parent_message = get_parent_post_text(data['post_id'])
     @text = data['text']
     @user_id = data['user_id']
+    @token = data['token']
     @board_id = find_board_id(parent_message)
     @card_id = find_card_id(parent_message)
   end
 
-  attr_reader :board_id, :card_id, :text, :user_id
+  attr_reader :board_id, :card_id, :text, :user_id, :token
 
-  def has_parent_wekan_link?
+  def parent_wekan_link?
     !(@card_id.nil? && @board_id.nil?)
   end
 
   private
 
   def get_parent_post_text(post_id)
-    body = get("#{Config.mattermost_url}/api/v4/posts/#{post_id}", Config.mattermost_bot_token)
+    config = Config.new
+    body = get("#{config.mattermost_url}/api/v4/posts/#{post_id}", config.mattermost_bot_token)
     parent_post_id = JSON.parse(body)['parent_id']
-    body = get("#{Config.mattermost_url}/api/v4/posts/#{parent_post_id}", Config.mattermost_bot_token)
+    body = get("#{config.mattermost_url}/api/v4/posts/#{parent_post_id}", config.mattermost_bot_token)
     JSON.parse(body)['message']
   end
 

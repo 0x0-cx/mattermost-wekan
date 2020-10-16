@@ -4,7 +4,7 @@ require 'webmock/rspec'
 require 'rack/test'
 
 require_relative 'spec_helper'
-require_relative './../lib/ttermost/wekan/callback_server'
+require_relative './../lib/mattermost/wekan/server'
 require_relative './../lib/config'
 
 RSpec.describe 'Sinatra app' do
@@ -19,7 +19,7 @@ RSpec.describe 'Sinatra app' do
   end
 
   it 'without body' do
-    post "/#{Config.mattermost_webhook_path}"
+    post '/'
     expect(last_response).to be_ok
     client = Mongo::Client.new
     expect(client[:cards].written?).to eq(false)

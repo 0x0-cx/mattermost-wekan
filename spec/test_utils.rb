@@ -1,27 +1,30 @@
 # frozen_string_literal: true
 
 require 'webmock'
-
+require 'singleton'
 class TestUtils
-  class << TestUtils
-    include WebMock::API
+  include WebMock::API
+  include Singleton
 
-    WebMock.enable!
+  WebMock.enable!
 
-    def callback_body(post_id)
-      {
-        token: Config.mattermost_token,
-        post_id: post_id,
-        text: 'text text',
-        user_id: '1'
-      }.to_json
-    end
+  def initialize
+    @config = Config.new
+  end
 
-    def mock_mattermost_post_endpoint(post_id, body)
-      WebMock.stub_request(:get, "#{Config.mattermost_url}/api/v4/posts/#{post_id}")
-             .to_return(status: 200, body: body.to_json, headers: {
-                          content_type: 'application/json'
-                        })
-    end
+  def callback_body(post_id)
+    {
+      token: @config.mattermost_token,
+      post_id: post_id,
+      text: 'text text',
+      user_id: '1'
+    }.to_json
+  end
+
+  def mock_mattermost_post_endpoint(post_id, body)
+    WebMock.stub_request(:get, "#{@config.mattermost_url}/api/v4/posts/#{post_id}")
+           .to_return(status: 200, body: body.to_json, headers: {
+                        content_type: 'application/json'
+                      })
   end
 end

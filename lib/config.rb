@@ -6,19 +6,19 @@ class Config
   end
 
   def mattermost_token
-    env.fetch('MATTERMOST_TOKEN')
+    @env.fetch('MATTERMOST_TOKEN')
   end
 
   def mattermost_bot_token
-    env.fetch('MATTERMOST_BOT_TOKEN')
+    @env.fetch('MATTERMOST_BOT_TOKEN')
   end
 
   def mattermost_url
-    env.fetch('MATTERMOST_URL')
+    @env.fetch('MATTERMOST_URL')
   end
 
   def wekan_db_url
-    env.fetch('WEKAN_DB_URL')
+    @env.fetch('WEKAN_DB_URL')
   end
 
   def user_map
@@ -28,10 +28,10 @@ class Config
   private
 
   def wekan_user_list
-    env.fetch('WEKAN_USER_LIST').split(' ')
+    @env.fetch('WEKAN_USER_LIST').split(' ')
   end
 
   def mattermost_user_list
-    env.fetch('MATTERMOST_USER_LIST').split(' ')
+    @env.fetch('MATTERMOST_USER_LIST').split(' ')
   end
 end

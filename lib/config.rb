@@ -25,6 +25,10 @@ class Config
     Hash[mattermost_user_list.zip(wekan_user_list)]
   end
 
+  def logger
+    Logger.new($stdout, Logger::DEBUG)
+  end
+
   private
 
   def wekan_user_list

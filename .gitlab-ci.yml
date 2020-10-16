@@ -1,14 +1,5 @@
 image: "ruby:2.7.1"
 
-variables:
-  MATTERMOST_TOKEN: "123"
-  MATTERMOST_WEBHOOK_PATH: "mattermost"
-  MATTERMOST_BOT_TOKEN: "username"
-  MATTERMOST_URL: "https://mattermost.org"
-  WEKAN_DB_URL: "wekan.org"
-  WEKAN_USER_LIST: "1"
-  MATTERMOST_USER_LIST: "1"
-
 cache:
   paths:
     - vendor/ruby

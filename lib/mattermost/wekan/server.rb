@@ -9,18 +9,15 @@ require_relative 'message'
 require_relative 'mongodb'
 
 class Server < Sinatra::Base
-  logger = Logger.new($stdout, Logger::DEBUG)
-
-  logger.debug 'start mattermost-wekan'
+  def initialize(app = nil, params = {})
+    super(app)
+    @config = params.fetch(:config, Config.new)
+    @config.logger.debug 'start mattermost-wekan'
+    @mongodb = Mongodb.new(@config)
+    @mongodb.connect
+  end
 
   set :bind, '0.0.0.0'
-
-  mongodb = Mongodb.new
-  config = Config.new
-
-  configure do
-    mongodb.connect
-  end
 
   post '/' do
     request_body = request.body.read.to_s
@@ -32,12 +29,12 @@ class Server < Sinatra::Base
     message = Message.new(request_body)
     if message.token == config.mattermost_token
       if message.parent_wekan_link?
-        mongodb.insert_comment(message.card_id, message.board_id, message.text, message.user_id)
+        @mongodb.insert_comment(message.card_id, message.board_id, message.text, message.user_id)
       else
         halt(200)
       end
     else
-      logger.warn 'wrong token. may be anyone try to hack bot'
+      @config.logger.warn 'wrong token. may be anyone try to hack bot'
       body 'token from request header not equal with configured mattermost outgoing webhook token'
       halt(400)
     end

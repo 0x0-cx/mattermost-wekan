@@ -6,8 +6,11 @@ require 'date'
 require_relative '../../config'
 
 class Mongodb
+  def initialize(config)
+    @config = config
+  end
+
   def connect
-    @config = Config.new
     @client = Mongo::Client.new("mongodb://#{@config.wekan_db_url}/wekan")
   end
 

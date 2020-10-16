@@ -9,7 +9,7 @@ class TestUtils
   WebMock.enable!
 
   def initialize
-    @config = Config.new
+    @config = Config.new(test_enviroment)
   end
 
   def callback_body(post_id)

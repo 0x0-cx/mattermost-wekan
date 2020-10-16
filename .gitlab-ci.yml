@@ -6,12 +6,13 @@ cache:
 
 rubocop:
   script:
-    - rubocop
+    -  bundle exec rubocop
 
 
 before_script:
   - ruby -v
-  - bundle install -j $(nproc) --path vendor
+  - bundler config set path 'vendor'
+  - bundle install -j $(nproc)
 
 rspec:
   script:

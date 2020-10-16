@@ -4,7 +4,7 @@ require 'mongo'
 require 'date'
 require 'securerandom'
 
-require_relative 'config'
+require_relative '../../config'
 
 class Mongodb
   def connect

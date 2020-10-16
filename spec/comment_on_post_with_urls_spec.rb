@@ -4,7 +4,7 @@ require 'webmock/rspec'
 require 'rack/test'
 
 require_relative 'spec_helper'
-require_relative './../lib/callback_server'
+require_relative './../lib/ttermost/wekan/callback_server'
 require_relative './../lib/config'
 require_relative 'test_utils'
 
@@ -12,7 +12,7 @@ RSpec.describe 'Sinatra app' do
   include Rack::Test::Methods
 
   def app
-    CallbackServer.new
+    Server.new
   end
 
   before :each do

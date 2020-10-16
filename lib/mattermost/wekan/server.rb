@@ -4,12 +4,12 @@ require 'logger'
 require 'sinatra'
 require 'json'
 
-require_relative 'config'
+require_relative '../../config'
 require_relative 'mattermost_api'
-require_relative 'message_parser'
+require_relative 'message'
 require_relative 'mongodb'
 
-class CallbackServer < Sinatra::Base
+class Server < Sinatra::Base
   logger = Logger.new($stdout, Logger::DEBUG)
 
   logger.debug 'start mattermost-wekan'
@@ -32,9 +32,9 @@ class CallbackServer < Sinatra::Base
     if data['token'] == Config.mattermost_token
       if MattermostApi.parent? data['post_id']
         parent_post_text = MattermostApi.get_parent_post_text(data['post_id'])
-        card_id = MessageParser.find_card_id parent_post_text
+        card_id = Message.find_card_id parent_post_text
         halt 200 if card_id.nil?
-        board_id = MessageParser.find_board_id parent_post_text
+        board_id = Message.find_board_id parent_post_text
         mongodb.insert_comment(card_id, board_id, data['text'], data['user_id'])
       end
     else

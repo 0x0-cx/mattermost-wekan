@@ -12,7 +12,7 @@ RSpec.describe 'Sinatra app' do
   include Rack::Test::Methods
 
   def app
-    Server.new(nil, { config: Config.new(TestUtils.instance.test_enviroment) })
+    Server.new(nil, { config: TestUtils.instance.config })
   end
 
   before :each do

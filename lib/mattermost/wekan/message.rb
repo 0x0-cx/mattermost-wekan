@@ -4,8 +4,8 @@ require 'uri'
 require 'faraday'
 
 class Message
-  def initialize(data, bot_token)
-    parent_message = get_parent_post_text(data['post_id'])
+  def initialize(data, bot_token, url)
+    parent_message = get_parent_post_text(data['post_id'], url)
     @text = data['text']
     @user_id = data['user_id']
     @token = data['token']
@@ -22,15 +22,15 @@ class Message
 
   private
 
-  def get_parent_post_text(post_id)
-    config = Config.new
-    body = get("#{config.mattermost_url}/api/v4/posts/#{post_id}", @bot_token)
+  def get_parent_post_text(post_id, url)
+    body = get("#{url}/api/v4/posts/#{post_id}", @bot_token)
     parent_post_id = JSON.parse(body)['parent_id']
-    body = get("#{config.mattermost_url}/api/v4/posts/#{parent_post_id}", @bot_token)
+    body = get("#{url}/api/v4/posts/#{parent_post_id}", @bot_token)
     JSON.parse(body)['message']
   end
 
   def get(url, token)
+    puts url
     Faraday.get(url, header: { 'Authorization' => "Bearer #{token}" }).body
   end
 

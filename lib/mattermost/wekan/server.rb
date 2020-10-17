@@ -26,7 +26,7 @@ class Server < Sinatra::Base
              more info https://docs.mattermost.com/developer/webhooks-outgoing.html'
       halt(400)
     end
-    message = Message.new(request_body, @config.mattermost_bot_token)
+    message = Message.new(JSON.parse(request_body), @config.mattermost_bot_token, @config.mattermost_url)
     if message.token == config.mattermost_token
       if message.parent_wekan_link?
         @mongodb.insert_comment(message.card_id, message.board_id, message.text, message.user_id)

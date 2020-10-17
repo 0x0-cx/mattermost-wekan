@@ -9,7 +9,7 @@ class TestUtils
   WebMock.enable!
 
   def initialize
-    @config = Config.new(test_enviroment)
+    @config = config
   end
 
   def callback_body(post_id)
@@ -22,11 +22,18 @@ class TestUtils
   end
 
   def mock_mattermost_post_endpoint(post_id, body)
+    puts "#{@config.mattermost_url}/api/v4/posts/#{post_id}"
     WebMock.stub_request(:get, "#{@config.mattermost_url}/api/v4/posts/#{post_id}")
            .to_return(status: 200, body: body.to_json, headers: {
                         content_type: 'application/json'
                       })
   end
+
+  def config
+    Config.new(test_enviroment)
+  end
+
+  private
 
   def test_enviroment
     Hash[

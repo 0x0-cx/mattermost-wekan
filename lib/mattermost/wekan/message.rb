@@ -5,11 +5,11 @@ require 'faraday'
 
 class Message
   def initialize(data, bot_token, url)
-    parent_message = get_parent_post_text(data['post_id'], url)
     @text = data['text']
     @user_id = data['user_id']
     @token = data['token']
     @bot_token = bot_token
+    parent_message = get_parent_post_text(data['post_id'], url)
     @board_id = find_board_id(parent_message)
     @card_id = find_card_id(parent_message)
   end
@@ -30,8 +30,7 @@ class Message
   end
 
   def get(url, token)
-    puts url
-    Faraday.get(url, header: { 'Authorization' => "Bearer #{token}" }).body
+    Faraday.get(url, nil, { 'Authorization' => "Bearer #{token}" }).body
   end
 
   def find_card_id(message)

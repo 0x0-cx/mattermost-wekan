@@ -20,7 +20,7 @@ RSpec.describe 'Sinatra app' do
 
   it 'without body' do
     post '/'
-    expect(last_response).to be_ok
+    expect(last_response.status).to eq(400)
     client = Mongo::Client.new
     expect(client[:cards].written?).to eq(false)
   end

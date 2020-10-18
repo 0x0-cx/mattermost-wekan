@@ -27,7 +27,7 @@ class Server < Sinatra::Base
       halt(400)
     end
     message = Message.new(JSON.parse(request_body), @config.mattermost_bot_token, @config.mattermost_url)
-    if message.token == config.mattermost_token
+    if message.token == @config.mattermost_token
       if message.parent_wekan_link?
         @mongodb.insert_comment(message.card_id, message.board_id, message.text, message.user_id)
       else

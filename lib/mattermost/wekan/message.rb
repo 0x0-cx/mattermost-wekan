@@ -10,6 +10,8 @@ class Message
     @token = data['token']
     @bot_token = bot_token
     parent_message = get_parent_post_text(data['post_id'], url)
+    return if parent_message.nil?
+
     @board_id = find_board_id(parent_message)
     @card_id = find_card_id(parent_message)
   end
@@ -25,8 +27,12 @@ class Message
   def get_parent_post_text(post_id, url)
     body = get("#{url}/api/v4/posts/#{post_id}", @bot_token)
     parent_post_id = JSON.parse(body)['parent_id']
-    body = get("#{url}/api/v4/posts/#{parent_post_id}", @bot_token)
-    JSON.parse(body)['message']
+    if parent_post_id.nil?
+      nil
+    else
+      body = get("#{url}/api/v4/posts/#{parent_post_id}", @bot_token)
+      JSON.parse(body)['message']
+    end
   end
 
   def get(url, token)

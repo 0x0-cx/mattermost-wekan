@@ -4,6 +4,7 @@ require 'mongo'
 require 'date'
 
 require_relative '../../config'
+require_relative 'comment'
 
 class Mongodb
   def initialize(config)

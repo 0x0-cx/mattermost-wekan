@@ -4,9 +4,9 @@ require 'logger'
 require 'sinatra'
 require 'json'
 
-require_relative '../../config'
-require_relative 'message'
-require_relative 'mongodb'
+require 'config'
+require 'mattermost/wekan/message'
+require 'mattermost/wekan/mongodb'
 
 class Server < Sinatra::Base
   def initialize(app = nil, params = {})

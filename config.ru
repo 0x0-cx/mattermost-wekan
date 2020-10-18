@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
-require './lib/mattermost/wekan/server'
+$:.unshift "#{File.dirname(__FILE__)}/lib"
+require 'mattermost/wekan/server'
 
 run Server

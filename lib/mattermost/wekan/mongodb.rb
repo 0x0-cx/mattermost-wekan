@@ -3,8 +3,8 @@
 require 'mongo'
 require 'date'
 
-require_relative '../../config'
-require_relative 'comment'
+require 'config'
+require 'mattermost/wekan/comment'
 
 class Mongodb
   def initialize(config)

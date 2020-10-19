@@ -16,7 +16,7 @@ RSpec.describe 'Sinatra app' do
   end
 
   before :each do
-    WebMock.disable_net_connect!(allow_localhost: true)
+    WebMock.disable_net_connect!(allow_localhost: false)
     TestUtils.instance.mock_mattermost_post_endpoint('2', parent_id: '-2')
     TestUtils.instance.mock_mattermost_post_endpoint('-2', message: 'Просто какой то текст')
     Mongo::Client.new[:cards].reset!

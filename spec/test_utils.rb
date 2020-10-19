@@ -35,13 +35,13 @@ class TestUtils
   private
 
   def test_enviroment
-    Hash[
-        'MATTERMOST_TOKEN', 'token',
-        'MATTERMOST_BOT_TOKEN', 'token',
-        'MATTERMOST_URL', 'https://mattermost.org',
-        'WEKAN_DB_URL', 'wekan.org',
-        'WEKAN_USER_LIST', '1',
-        'MATTERMOST_USER_LIST', '1'
-    ]
+    {
+      'MATTERMOST_TOKEN' => 'token',
+      'MATTERMOST_BOT_TOKEN' => 'token',
+      'MATTERMOST_URL' => 'https://mattermost.org',
+      'WEKAN_DB_URL' => 'wekan.org',
+      'WEKAN_USER_LIST' => '1',
+      'MATTERMOST_USER_LIST' => '1'
+    }
   end
 end

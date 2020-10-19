@@ -14,7 +14,7 @@ module Mattermost
       end
 
       def connect
-        @client = Mongo::Client.new("mongodb://#{@config.wekan_db_url}/wekan")
+        @client = Mongo::Client.new("mongodb://#{@config.wekan_db_url}")
       end
 
       def insert_comment(card_id, board_id, comment_text, mattermost_user_id)

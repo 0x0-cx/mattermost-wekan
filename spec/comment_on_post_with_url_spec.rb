@@ -16,7 +16,7 @@ RSpec.describe 'Sinatra app' do
   end
 
   before :each do
-    WebMock.disable_net_connect!(allow_localhost: true)
+    WebMock.disable_net_connect!(allow_localhost: false)
     TestUtils.instance.mock_mattermost_post_endpoint('4', parent_id: '-4')
     TestUtils.instance.mock_mattermost_post_endpoint('-4', message:
         'Какой то текст [https://vk.com/12/sdf/13](sdf) ещ')

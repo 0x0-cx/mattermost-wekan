@@ -22,7 +22,6 @@ class TestUtils
   end
 
   def mock_mattermost_post_endpoint(post_id, body)
-    puts "#{@config.mattermost_url}/api/v4/posts/#{post_id}"
     WebMock.stub_request(:get, "#{@config.mattermost_url}/api/v4/posts/#{post_id}")
            .to_return(status: 200, body: body.to_json, headers: {
                         content_type: 'application/json'
@@ -30,7 +29,7 @@ class TestUtils
   end
 
   def config
-    Config.new(test_enviroment)
+    Mattermost::Wekan::Config.new(test_enviroment)
   end
 
   private

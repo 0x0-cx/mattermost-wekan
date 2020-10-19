@@ -8,7 +8,7 @@ RUN apk update && \
     apk upgrade && \
     apk add --no-cache --update alpine-sdk && \
     apk add --no-cache make && \
-    bundler config set without 'test' 'ci'&& \
+    bundler config set without 'test' && \
     bundler install --path=vendor/bundle
 
 

@@ -4,15 +4,15 @@ require 'webmock/rspec'
 require 'rack/test'
 
 require_relative 'spec_helper'
-require_relative './../lib/mattermost/wekan/server'
-require_relative './../lib/config'
-require_relative 'test_utils'
+require 'mattermost/wekan/server'
+require 'mattermost/wekan/config'
+require 'test_utils'
 
 RSpec.describe 'Sinatra app' do
   include Rack::Test::Methods
 
   def app
-    Server.new(nil, { config: TestUtils.instance.config })
+    Mattermost::Wekan::Server.new(nil, { config: TestUtils.instance.config })
   end
 
   before :each do

@@ -28,8 +28,12 @@ module Mattermost
              more info https://docs.mattermost.com/developer/webhooks-outgoing.html'
           halt(400)
         end
-        message = Message.new(JSON.parse(request_body), @config.mattermost_bot_token, @config.mattermost_url)
-        if message.token == @config.mattermost_token
+        data = JSON.parse(request_body)
+        message = Message.new(text: data['text'],
+                              user_id: @config.user_map[data['user_id']],
+                              post_id: data['post_id'],
+                              config: @config)
+        if data['token'] == @config.mattermost_token
           if message.parent_wekan_link?
             @mongodb.insert_comment(message.card_id, message.board_id, message.text, message.user_id)
           else

@@ -10,6 +10,7 @@ group 'test' do
   gem 'webmock', '3.9.2'
 end
 
+gem 'attr_extras', '6.2.4'
 gem 'faraday', '1.0.1'
 gem 'mongo', '2.14.0.rc1'
 gem 'puma', '5.0.2'

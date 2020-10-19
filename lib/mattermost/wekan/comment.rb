@@ -1,27 +1,21 @@
 # frozen_string_literal: true
 
 require 'securerandom'
+require 'attr_extras'
 
 module Mattermost
   module Wekan
     class Comment
-      def initialize(user_id:, card_id:, board_id:, text:, last_id:, swimlane_id:)
-        @user_id = user_id
-        @card_id = card_id
-        @board_id = board_id
-
-        @comment_id ||= SecureRandom.uuid[0..16]
-        @date_time ||= DateTime.now.iso8601
-      end
+      vattr_initialize :user_id, :card_id, :board_id, :text, :list_id, :swimlane_id
 
       def as_comment
         {
-          _id: @comment_id,
-          text: comment,
+          _id: comment_id,
+          text: @text,
           boardId: @board_id,
           cardId: @card_id,
-          createdAt: @date_time,
-          modifiedAt: @date_time,
+          createdAt: date_time,
+          modifiedAt: date_time,
           userId: @user_id
         }
       end
@@ -32,12 +26,20 @@ module Mattermost
           activityType: 'addComment',
           boardId: @board_id,
           cardId: @card_id,
-          commentId: @comment_id,
-          listId: list_id,
-          swimlaneId: swimlane_id,
-          createdAt: @date_time,
-          modifiedAt: @date_time
+          commentId: comment_id,
+          listId: @list_id,
+          swimlaneId: @swimlane_id,
+          createdAt: date_time,
+          modifiedAt: date_time
         }
+      end
+
+      def comment_id
+        @comment_id ||= SecureRandom.uuid[0..16]
+      end
+
+      def date_time
+        @date_time ||= DateTime.now.iso8601
       end
     end
   end

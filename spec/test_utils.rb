@@ -43,7 +43,8 @@ class TestUtils
       'WEKAN_URL' => 'https://wekan.org',
       'WEKAN_USER_LIST' => '1',
       'MATTERMOST_USER_LIST' => '1',
-      'DEBUG' => 'true'
+      'DEBUG' => 'true
+'
     }
   end
 end

@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'wannabe_bool'
+
 module Mattermost
   module Wekan
     class Config
@@ -28,7 +30,7 @@ module Mattermost
       end
 
       def debug?
-        @env.fetch('DEBUG')
+        @env.fetch('DEBUG').to_b
       end
 
       def user_map

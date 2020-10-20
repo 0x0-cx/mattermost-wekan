@@ -15,11 +15,11 @@ module Mattermost
 
       def connect
         @client = Mongo::Client.new(@config.wekan_db_url)
-        @config.logger.info("connect to mongodb #{@config.wekan_db_url}") if @config.debug?
+        @config.logger.debug("connect to mongodb #{@config.wekan_db_url}") if @config.debug?
       end
 
       def insert_comment(card_id:, board_id:, comment_text:, user_id:)
-        @config.logger.info("insert comment #{comment_text}") if @config.debug?
+        @config.logger.debug("insert comment #{comment_text}") if @config.debug?
         card =  client[:cards].find({ '_id' => card_id }).first
         comment = Comment.new(user_id: user_id,
                               card_id: card_id,

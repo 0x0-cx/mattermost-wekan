@@ -14,7 +14,7 @@ module Mattermost
       def initialize(app = nil, params = {})
         super(app)
         @config = params.fetch(:config, Config.new)
-        @config.logger.debug 'start mattermost-wekan'
+        @config.logger.info 'start mattermost-wekan'
         @mongodb = Mongodb.new(config)
         @mongodb.connect
       end
@@ -30,7 +30,7 @@ module Mattermost
         make_response(message: HELP_MESSAGE, code: 400) if request_body.empty?
 
         data = JSON.parse(request_body)
-        config.logger.info("receive #{request_body}") if config.debug?
+        config.logger.debug("receive #{request_body}") if config.debug?
         make_response(message: WRONG_TOKEN_MESSAGE, code: 400) unless data['token'] == config.mattermost_token
 
         message = Message.new(post_id: data['post_id'], config: config)
@@ -46,7 +46,8 @@ module Mattermost
       end
 
       def make_response(code:, message: '')
-        config.logger.info("response code = #{code} message = #{message}") if config.debug?
+        config.logger.debug("response code = #{code} message = #{message}") if config.debug?
+
         halt(code, { 'content_type' => 'application/json' }, JSON({ message: message }))
       end
 

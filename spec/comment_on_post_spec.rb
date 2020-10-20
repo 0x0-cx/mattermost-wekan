@@ -24,7 +24,6 @@ RSpec.describe 'Sinatra app' do
 
   it 'comment on simple post' do
     post('/', TestUtils.instance.callback_body('2'), content_type: 'application/json')
-    expect(last_response).to be_ok
     client = Mongo::Client.new
     expect(client[:cards].written?).to eq(false)
   end

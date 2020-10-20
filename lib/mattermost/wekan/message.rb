@@ -6,62 +6,58 @@ require 'faraday'
 module Mattermost
   module Wekan
     class Message
-      def initialize(text:, user_id:, post_id:, config:)
-        @text = text
-        @user_id = user_id
-        @post_id = post_id
-        @config = config
-      end
+      vattr_initialize %i[post_id! config!]
 
-      attr_reader :text, :user_id, :post_id
-
-      def parent_wekan_link?
-        !(card_id.nil? && board_id.nil?)
+      def should_send_to_wekan?
+        card_id && board_id
       end
 
       def board_id
-        @board_id ||= begin
-          unless url.nil?
-            arr = url.split('/')
-            arr[arr.size - 3]
-          end
-        end
+        return if wekan_url.nil?
+
+        arr = wekan_url.split('/')
+        arr[arr.size - 3]
       end
 
       def card_id
-        @card_id ||= begin
-          url&.split('/')&.last
-        end
+        wekan_url&.split('/')&.last
       end
 
       private
 
       def post
-        @post ||= get(@post_id)
+        @post ||= fetch_post(post_id)
       end
 
-      def parent_post_message
-        parent_post_id = post['parent_id']
-        return unless parent_post_id
-
-        @parent_post = get(parent_post_id)['message']
-      end
-
-      def url
-        @url ||= begin
-          unless parent_post_message.nil?
-            urls = URI.extract(parent_post_message)
-            urls.last if urls.length == 1 && urls.last.include?('wekan')
-          end
+      def parent_post
+        @parent_post ||= begin
+          fetch_post(post['parent_id']) unless post.nil?
         end
       end
 
-      def get(post_id)
-        body = Faraday.get("#{@config.mattermost_url}/api/v4/posts/#{post_id}",
+      def parent_post_message
+        return if parent_post.nil?
+
+        parent_post['message']
+      end
+
+      def wekan_url
+        return if parent_post_message.nil?
+
+        urls = URI.extract(parent_post_message)
+        urls.last if urls.length == 1 && urls.last.include?(config.wekan_url)
+      end
+
+      def fetch_post(post_id)
+        return if post_id.nil?
+
+        body = Faraday.get("#{config.mattermost_url}/api/v4/posts/#{post_id}",
                            nil,
-                           { 'Authorization' => "Bearer #{@config.mattermost_bot_token}" }).body
+                           { 'Authorization' => "Bearer #{config.mattermost_bot_token}" }).body
         JSON.parse(body)
       end
+
+      attr_reader :post_id, :config
     end
   end
 end

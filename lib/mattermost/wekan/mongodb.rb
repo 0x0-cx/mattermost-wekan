@@ -14,17 +14,17 @@ module Mattermost
       end
 
       def connect
-        @client = Mongo::Client.new("mongodb://#{@config.wekan_db_url}")
+        @client = Mongo::Client.new(@config.wekan_db_url)
       end
 
-      def insert_comment(card_id, board_id, comment_text, mattermost_user_id)
+      def insert_comment(card_id:, board_id:, comment_text:, user_id:)
         card = @client[:cards].find(_id: card_id).first
-        comment = Comment.new(@config.user_map[mattermost_user_id],
-                              card_id,
-                              board_id,
-                              comment_text,
-                              card['listId'],
-                              card['swimlaneId'])
+        comment = Comment.new(user_id: user_id,
+                              card_id: card_id,
+                              board_id: board_id,
+                              text: comment_text,
+                              list_id: card['listId'],
+                              swimlane_id: card['swimlaneId'])
         @client[:card_comments].insert_one(comment.as_comment)
         @client[:activity].insert_one(comment.as_activity)
       end

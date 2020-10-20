@@ -40,6 +40,7 @@ class TestUtils
       'MATTERMOST_BOT_TOKEN' => 'token',
       'MATTERMOST_URL' => 'https://mattermost.org',
       'WEKAN_DB_URL' => 'wekan.org',
+      'WEKAN_URL' => 'https://wekan.org',
       'WEKAN_USER_LIST' => '1',
       'MATTERMOST_USER_LIST' => '1'
     }

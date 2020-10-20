@@ -23,6 +23,10 @@ module Mattermost
         @env.fetch('WEKAN_DB_URL')
       end
 
+      def wekan_url
+        @env.fetch('WEKAN_URL')
+      end
+
       def user_map
         Hash[mattermost_user_list.zip(wekan_user_list)]
       end

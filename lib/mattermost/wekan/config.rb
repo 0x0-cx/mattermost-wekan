@@ -27,6 +27,10 @@ module Mattermost
         @env.fetch('WEKAN_URL')
       end
 
+      def debug?
+        @env.fetch('DEBUG')
+      end
+
       def user_map
         Hash[mattermost_user_list.zip(wekan_user_list)]
       end

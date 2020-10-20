@@ -2,6 +2,7 @@
 
 require 'uri'
 require 'faraday'
+require 'attr_extras'
 
 module Mattermost
   module Wekan
@@ -20,7 +21,10 @@ module Mattermost
       end
 
       def card_id
-        wekan_url&.split('/')&.last
+        id = wekan_url&.split('/')&.last
+        return if id.nil?
+
+        id.tr(')', '')
       end
 
       private

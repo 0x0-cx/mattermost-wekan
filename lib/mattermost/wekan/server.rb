@@ -27,28 +27,27 @@ module Mattermost
 
       post '/' do
         request_body = request.body.read.to_s
-        bad_request(HELP_MESSAGE) if request_body.empty?
+        make_response(message: HELP_MESSAGE, code: 400) if request_body.empty?
 
         data = JSON.parse(request_body)
+        config.logger.info("receive #{request_body}") if config.debug?
+        make_response(message: WRONG_TOKEN_MESSAGE, code: 400) unless data['token'] == config.mattermost_token
+
         message = Message.new(post_id: data['post_id'], config: config)
+        make_response(code: 200) unless message.should_send_to_wekan?
 
-        bad_request unless data['token'] == config.mattermost_token
+        insert_result = mongodb.insert_comment(card_id: message.card_id,
+                                               board_id: message.board_id,
+                                               comment_text: data['text'],
+                                               user_id: config.user_map[data['user_id']])
+        make_response(message: 'failed to insert comment to mongodb', code: 500) unless insert_result
 
-        unless message.should_send_to_wekan?
-          halt(200, { 'content_type' => 'application/json' }, JSON({ is_error: false, message: '' }))
-        end
-
-        mongodb.insert_comment(card_id: message.card_id,
-                               board_id: message.board_id,
-                               comment_text: data['text'],
-                               user_id: config.user_map[data['user_id']])
-        halt(200,
-             { 'content_type' => 'application/json' },
-             JSON({ is_error: false, message: 'successfully handle comment' }))
+        make_response(message: 'successfully handle comment', code: 200)
       end
 
-      def bad_request(message)
-        halt(400, { 'content_type' => 'application/json' }, JSON({ is_error: true, message: message }))
+      def make_response(code:, message: '')
+        config.logger.info("response code = #{code} message = #{message}") if config.debug?
+        halt(code, { 'content_type' => 'application/json' }, JSON({ message: message }))
       end
 
       attr_reader :config, :mongodb

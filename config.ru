@@ -3,4 +3,4 @@
 $LOAD_PATH.unshift "#{File.dirname(__FILE__)}/lib"
 require 'mattermost/wekan/server'
 
-run Server
+run Mattermost::Wekan::Server

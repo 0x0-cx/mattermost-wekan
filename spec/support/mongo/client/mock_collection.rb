@@ -23,6 +23,11 @@ module Mongo
                    else
                      activity_correct?(element)
                    end
+        MockCollection.instance
+      end
+
+      def successful?
+        true
       end
 
       def correct?

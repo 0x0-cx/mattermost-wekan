@@ -3,10 +3,8 @@
 require 'webmock/rspec'
 require 'rack/test'
 
-require_relative 'spec_helper'
-require 'mattermost/wekan/server'
-require 'mattermost/wekan/config'
-require_relative 'test_utils'
+require_relative '../spec_helper'
+require_relative '../test_utils'
 
 RSpec.describe 'Sinatra app' do
   include Rack::Test::Methods
@@ -23,7 +21,7 @@ RSpec.describe 'Sinatra app' do
   end
 
   it 'comment on simple post' do
-    post('/', TestUtils.instance.callback_body('2'), content_type: 'application/json')
+    post('/', TestUtils.instance.callback_body('2'), { 'CONTENT_TYPE' => 'application/json' })
     client = Mongo::Client.new
     expect(last_response).to be_ok
     expect(client[:cards].written?).to eq(false)

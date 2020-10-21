@@ -29,6 +29,14 @@ module Mattermost
         @env.fetch('WEKAN_URL')
       end
 
+      def wekan_board_id
+        @env.fetch('WEKAN_BOARD_ID')
+      end
+
+      def wekan_swimlane_name
+        @env.fetch('WEKAN_SWIMLANE_NAME', 'Default')
+      end
+
       def debug?
         @env['DEBUG']&.to_b
       end

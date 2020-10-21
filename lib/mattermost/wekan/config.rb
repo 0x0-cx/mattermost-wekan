@@ -38,10 +38,18 @@ module Mattermost
       end
 
       def logger
-        Logger.new($stdout, level: (debug? ? Logger::DEBUG : Logger::INFO))
+        Logger.new($stdout, level: (log_level || default_log_level))
       end
 
       private
+
+      def default_log_level
+        debug? ? Logger::DEBUG : Logger::INFO
+      end
+
+      def log_level
+        @env['LOG_LEVEL']&.to_i
+      end
 
       def wekan_user_list
         @env.fetch('WEKAN_USER_LIST').split(' ')

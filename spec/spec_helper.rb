@@ -2,7 +2,7 @@
 
 $LOAD_PATH.unshift "#{File.dirname(__FILE__)}/../lib"
 require 'bundler/setup'
-Bundler.require
+Bundler.require('test')
 
 require 'support/mongo/client/mock_collection'
 
@@ -11,7 +11,7 @@ module Mongo
     def self.new(*)
       {
         cards: MockCollection.instance,
-        activity: MockCollection.instance,
+        activities: MockCollection.instance,
         card_comments: MockCollection.instance
       }
     end

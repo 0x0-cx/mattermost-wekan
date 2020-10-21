@@ -3,6 +3,7 @@
 source 'https://rubygems.org'
 
 group 'test' do
+  gem 'pry-byebug'
   gem 'rack-test', '1.1.0'
   gem 'rspec', '3.9.0'
   gem 'rspec-mocks', '3.9.1'

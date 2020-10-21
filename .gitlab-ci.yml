@@ -1,28 +1,19 @@
 image: "ruby:2.7.1"
 
-variables:
-  MATTERMOST_TOKEN: "123"
-  MATTERMOST_WEBHOOK_PATH: "mattermost"
-  MATTERMOST_BOT_TOKEN: "username"
-  MATTERMOST_URL: "https://mattermost.org"
-  WEKAN_DB_URL: "wekan.org"
-  WEKAN_USER_LIST: "1"
-  MATTERMOST_USER_LIST: "1"
-
 cache:
   paths:
     - vendor/ruby
 
 rubocop:
   script:
-    - rubocop
+    -  bundle exec rubocop
 
 
 before_script:
   - ruby -v
-  - gem install rubocop
-  - bundle install -j $(nproc) --path vendor
+  - bundler config set path 'vendor'
+  - bundle install -j $(nproc)
 
 rspec:
   script:
-    - bundle exec rspec spec/*
+    - bundle exec rspec spec

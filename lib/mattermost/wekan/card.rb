@@ -1,0 +1,69 @@
+# frozen_string_literal: true
+
+module Mattermost
+  module Wekan
+    class Card
+      vattr_initialize %i[title! board_id! swimlane_id! description! user_id! assign_user_id! list_id! list_name!]
+
+      # https://github.com/wekan/wekan/blob/master/models/cards.js
+      def as_card
+        {
+          _id: card_id,
+          title: title,
+          boardId: board_id,
+          sort: 0,
+          swimlaneId: swimlane_id,
+          type: 'cardType-card',
+          archived: false,
+          createdAt: date_time,
+          modifiedAt: date_time,
+          dateLastActivity: date_time,
+          description: description,
+          assignees: [assign_user_id],
+          spentTime: 0,
+          isOvertime: false,
+          userId: user_id,
+          subtaskSort: -1,
+          vote: {
+            question: '',
+            positive: [],
+            negative: [],
+            end: nil,
+            public: false,
+            allowNonBoardMembers: false
+          },
+          members: [],
+          # TODO: insert label with random color
+          labelIds: [],
+          customFields: [],
+          listId: list_id
+        }
+      end
+
+      def as_activity
+        {
+          _id: SecureRandom.uuid[0..16],
+          userId: user_id,
+          activityType: 'createCard',
+          boardId: board_id,
+          createdAt: date_time,
+          modifiedAt: date_time,
+          swimlaneId: swimlane_id,
+          listId: list_id,
+          cardId: card_id,
+          cardTitle: title,
+          listName: list_name,
+          swimlaneName: 'Default'
+        }
+      end
+
+      def card_id
+        @card_id ||= SecureRandom.uuid[0..16]
+      end
+
+      def date_time
+        @date_time ||= DateTime.now
+      end
+    end
+  end
+end

@@ -12,9 +12,9 @@ class TestUtils
     @config = config
   end
 
-  def callback_body(post_id)
+  def callback_body(post_id, token = @config.mattermost_token)
     {
-      token: @config.mattermost_token,
+      token: token,
       post_id: post_id,
       text: 'text text',
       user_id: '1'
@@ -44,7 +44,9 @@ class TestUtils
       'WEKAN_USER_LIST' => '1',
       'MATTERMOST_USER_LIST' => '1',
       'DEBUG' => 'false',
-      'LOG_LEVEL' => '3'
+      'WEKAN_BOARD_ID' => '45',
+      'LOG_LEVEL' => '3',
+      'MATTERMOST_SLASH_TOKEN' => 'slash_token'
     }
   end
 end

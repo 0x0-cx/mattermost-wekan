@@ -20,8 +20,7 @@ module Mattermost
         config.logger.debug("connect to mongodb #{config.wekan_db_url}")
       end
 
-      def insert_comment(card_id:, board_id:, comment_text:, user_id:)
-        config.logger.debug("insert comment #{comment_text}")
+      def inject_comment(card_id:, board_id:, comment_text:, user_id:)
         card =  client[:cards].find({ '_id' => card_id }).first
         comment = Comment.new(user_id: user_id,
                               card_id: card_id,
@@ -30,20 +29,37 @@ module Mattermost
                               list_id: card['listId'],
                               swimlane_id: card['swimlaneId'])
         comment_result = insert_card_comment(comment: comment)
-        activity_result = insert_activity(comment: comment)
+        activity_result = insert_activity(activity: comment.as_activity)
         comment_result && activity_result
+      end
+
+      def inject_card(card)
+        insert_card(card: card) && insert_activity(activity: card.as_activity)
+      end
+
+      def swimlane_id
+        client[:swimlanes].find({ 'boardId' => config.wekan_board_id, 'title' => 'Default' }).first['_id']
+      end
+
+      def list_id(title:)
+        client[:lists].find({ 'boardId' => config.wekan_board_id, 'title' => title }).first['_id']
       end
 
       private
 
+      def insert_card(card:)
+        config.logger.debug({ card: card }.inspect)
+        client[:cards].insert_one(card.as_card).successful?
+      end
+
       def insert_card_comment(comment:)
-        config.logger.debug({ comment_as_comment: comment.as_comment }.inspect)
+        config.logger.debug({ comment: comment.as_comment }.inspect)
         client[:card_comments].insert_one(comment.as_comment).successful?
       end
 
-      def insert_activity(comment:)
-        config.logger.debug({ comment_as_activity: comment.as_activity }.inspect)
-        client[:activities].insert_one(comment.as_activity).successful?
+      def insert_activity(activity:)
+        config.logger.debug({ activity: activity }.inspect)
+        client[:activities].insert_one(activity).successful?
       end
 
       def client

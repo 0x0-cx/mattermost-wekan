@@ -12,7 +12,10 @@ module Mongo
       {
         cards: MockCollection.instance,
         activities: MockCollection.instance,
-        card_comments: MockCollection.instance
+        card_comments: MockCollection.instance,
+        boards: MockCollection.instance,
+        swimlanes: MockCollection.instance,
+        lists: MockCollection.instance
       }
     end
   end

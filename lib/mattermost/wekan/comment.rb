@@ -41,8 +41,6 @@ module Mattermost
       def date_time
         @date_time ||= DateTime.now.iso8601
       end
-
-      attr_reader :text, :board_id, :card_id, :user_id, :list_id, :swimlane_id
     end
   end
 end

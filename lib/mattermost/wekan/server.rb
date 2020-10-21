@@ -24,6 +24,8 @@ module Mattermost
       HELP_MESSAGE = 'Server work but you must configure mattermost outgoing hooks to this server.
              more info https://docs.mattermost.com/developer/webhooks-outgoing.html'
       WRONG_TOKEN_MESSAGE =  'token from request header not equal with configured mattermost outgoing webhook token'
+      MONGO_ERROR = 'failed to insert comment to mongodb'
+      SUCCESS_MESSAGE = 'successfully handle comment'
 
       post '/' do
         request_body = request.body.read.to_s
@@ -40,9 +42,9 @@ module Mattermost
                                                board_id: message.board_id,
                                                comment_text: data['text'],
                                                user_id: config.user_map[data['user_id']])
-        make_response(message: 'failed to insert comment to mongodb', code: 500) unless insert_result
+        make_response(message: MONGO_ERROR, code: 500) unless insert_result
 
-        make_response(message: 'successfully handle comment', code: 200)
+        make_response(message: SUCCESS_MESSAGE, code: 200)
       end
 
       def make_response(code:, message: '')

@@ -20,4 +20,7 @@ WORKDIR /app
 
 EXPOSE 4567
 
+ENV PATH "$PATH:/app/vendor/bundle/ruby/2.7.0/bin"
+ENV GEM_HOME "/app/vendor/bundle/ruby/2.7.0"
+
 CMD ["rackup"]

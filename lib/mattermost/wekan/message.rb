@@ -28,13 +28,17 @@ module Mattermost
       private
 
       def post
-        @post ||= fetch_post(post_id)
+        return @post if defined? @post
+
+        @post = fetch_post(post_id)
       end
 
       def parent_post
         return unless post
+        return if post['parent_id'].to_s.empty?
+        return @parent_post if defined? @parent_post
 
-        @parent_post ||= fetch_post(post['parent_id'])
+        @parent_post = fetch_post(post['parent_id'])
       end
 
       def parent_post_message
@@ -46,17 +50,19 @@ module Mattermost
       def wekan_url
         return unless parent_post_message
 
-        urls = URI.extract(parent_post_message)
-        urls.last if urls.length == 1 && urls.last.include?(config.wekan_url)
+        @wekan_url ||= URI.extract(parent_post_message).find { |url| url.include?(config.wekan_url) }
       end
 
       def fetch_post(post_id)
         return unless post_id
 
-        body = Faraday.get("#{config.mattermost_url}/api/v4/posts/#{post_id}",
+        resp = Faraday.get("#{config.mattermost_url}/api/v4/posts/#{post_id}",
                            nil,
-                           { 'Authorization' => "Bearer #{config.mattermost_bot_token}" }).body
-        JSON.parse(body)
+                           { 'Authorization' => "Bearer #{config.mattermost_bot_token}" })
+        config.logger.debug({ resp: resp }.inspect)
+        return unless resp.success?
+
+        JSON.parse(resp.body)
       end
     end
   end

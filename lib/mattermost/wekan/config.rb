@@ -30,7 +30,7 @@ module Mattermost
       end
 
       def debug?
-        @env.fetch('DEBUG').to_b
+        @env['DEBUG']&.to_b
       end
 
       def user_map
@@ -38,7 +38,7 @@ module Mattermost
       end
 
       def logger
-        Logger.new($stdout, Logger::DEBUG)
+        Logger.new($stdout, level: (debug? ? Logger::DEBUG : Logger::INFO))
       end
 
       private

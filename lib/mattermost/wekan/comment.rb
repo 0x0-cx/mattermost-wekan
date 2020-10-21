@@ -39,7 +39,7 @@ module Mattermost
       end
 
       def date_time
-        @date_time ||= DateTime.now.iso8601
+        @date_time ||= DateTime.now
       end
     end
   end

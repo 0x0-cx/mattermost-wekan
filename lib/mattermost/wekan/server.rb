@@ -1,27 +1,30 @@
 # frozen_string_literal: true
 
-require 'logger'
-require 'sinatra'
-require 'json'
+require 'bundler'
+Bundler.require(:default, (ENV['APP_ENV'] || 'development').to_sym)
 
 require 'mattermost/wekan/config'
 require 'mattermost/wekan/message'
 require 'mattermost/wekan/mongodb'
 require 'mattermost/wekan/middleware/token_validator'
-require 'mattermost/wekan/nickname'
+require 'mattermost/wekan/nickname_store'
 require 'mattermost/wekan/card_title'
 require 'mattermost/wekan/card'
 
 module Mattermost
   module Wekan
     class Server < Sinatra::Base
+      attr_reader :config, :mongodb, :nickname
+
+      use Rack::JSONBodyParser
       use Middleware::TokenValidator
 
       def initialize(app = nil, params = {})
         super(app)
+
         @config = params.fetch(:config, Config.new)
         @config.logger.info 'start mattermost-wekan'
-        @nickname = Nickname.new(config: @config)
+        @nickname = NicknameStore.new(config: @config)
         @mongodb = Mongodb.new(config)
         @mongodb.connect
       end
@@ -33,7 +36,7 @@ module Mattermost
       NO_LINK = 'no link to wekan card found'
 
       post '/' do
-        data = JSON.parse(request.body.read.to_s)
+        data = request.params
         message = Message.new(post_id: data['post_id'], config: config)
         config.logger.debug({ message: message }.inspect)
         make_response(code: 200, message: NO_LINK) unless message.should_send_to_wekan?
@@ -47,26 +50,29 @@ module Mattermost
         make_response(message: SUCCESS_MESSAGE, code: 200)
       end
 
-      command2column = {
+      COMMAND_2_COLUMN = {
         '/wi' => 'icebox',
         '/w-icebox' => 'icebox',
         '/wb' => 'backlog',
         '/w-backlog' => 'backlog'
-      }
+      }.freeze
 
       post '/command' do
         card_title = CardTitle.new(text: @params['text'])
-        card = Card.new(
-          title: card_title.title,
-          board_id: config.wekan_board_id,
-          swimlane_id: mongodb.swimlane_id,
-          description: card_title.description,
-          user_id: config.user_map[@params['user_id']],
-          assign_user_id: nickname.wekan_user_id(username: card_title.author),
-          list_id: mongodb.list_id(title: command2column[@params['command']]),
-          list_name: command2column[@params['command']]
-        )
-        make_response(message: MONGO_ERROR, code: 500) unless mongodb.inject_card(card)
+        Retryable.retryable(tries: 2, on: NicknameStore::NickNameCacheError) do
+          card = Card.new(
+            title: card_title.title,
+            description: card_title.description,
+            board_id: config.wekan_board_id,
+            user_id: config.user_map[@params['user_id']],
+            swimlane_name: config.wekan_swimlane_name,
+            swimlane_id: mongodb.swimlane_id,
+            list_id: mongodb.list_id(title: COMMAND_2_COLUMN[@params['command']]),
+            assignee_id: nickname.wekan_user_id(username: card_title.assign_to),
+            list_name: COMMAND_2_COLUMN[@params['command']]
+          )
+          make_response(message: MONGO_ERROR, code: 500) unless mongodb.inject_card(card)
+        end
 
         make_response(message: SUCCESS_MESSAGE, code: 200)
       end
@@ -75,8 +81,6 @@ module Mattermost
         config.logger.info({ code: code, message: message }.inspect)
         halt(code, { 'content_type' => 'application/json' }, JSON({ message: message }))
       end
-
-      attr_reader :config, :mongodb, :nickname
     end
   end
 end

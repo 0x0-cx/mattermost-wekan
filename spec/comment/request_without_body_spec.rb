@@ -4,8 +4,6 @@ require 'webmock/rspec'
 require 'rack/test'
 
 require_relative '../spec_helper'
-require 'mattermost/wekan/server'
-require 'mattermost/wekan/config'
 require_relative '../test_utils'
 
 RSpec.describe 'Sinatra app' do

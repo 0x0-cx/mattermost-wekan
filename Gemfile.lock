@@ -42,6 +42,7 @@ GEM
       rack (>= 1.0, < 3)
     rainbow (3.0.0)
     regexp_parser (1.8.2)
+    retryable (3.0.5)
     rexml (3.2.4)
     rspec (3.9.0)
       rspec-core (~> 3.9.0)
@@ -87,21 +88,22 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  attr_extras (= 6.2.4)
-  concurrent-ruby (= 1.1.7)
-  faraday (= 1.0.1)
-  mongo (= 2.14.0.rc1)
-  pry-byebug (= 3.9.0)
-  puma (= 5.0.2)
-  rack-contrib (= 2.2.0)
-  rack-test (= 1.1.0)
-  rspec (= 3.9.0)
-  rspec-mocks (= 3.9.1)
-  rubocop (= 0.93.1)
-  securerandom (= 0.1.0)
-  sinatra (= 2.1.0)
-  wannabe_bool (= 0.7.1)
-  webmock (= 3.9.2)
+  attr_extras
+  concurrent-ruby
+  faraday
+  mongo
+  pry-byebug
+  puma
+  rack-contrib
+  rack-test
+  retryable
+  rspec
+  rspec-mocks
+  rubocop
+  securerandom
+  sinatra
+  wannabe_bool
+  webmock
 
 BUNDLED WITH
    2.1.4

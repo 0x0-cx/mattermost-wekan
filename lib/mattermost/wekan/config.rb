@@ -13,10 +13,6 @@ module Mattermost
         @env.fetch('MATTERMOST_TOKEN')
       end
 
-      def mattermost_slash_token
-        @env.fetch('MATTERMOST_SLASH_TOKEN')
-      end
-
       def mattermost_bot_token
         @env.fetch('MATTERMOST_BOT_TOKEN')
       end
@@ -35,6 +31,10 @@ module Mattermost
 
       def wekan_board_id
         @env.fetch('WEKAN_BOARD_ID')
+      end
+
+      def wekan_swimlane_name
+        @env.fetch('WEKAN_SWIMLANE_NAME', 'Default')
       end
 
       def debug?

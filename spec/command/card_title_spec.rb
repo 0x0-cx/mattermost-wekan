@@ -3,7 +3,6 @@
 require 'rspec'
 
 require_relative '../spec_helper'
-require 'mattermost/wekan/card_title'
 
 RSpec.describe 'card title' do
   it 'correct command' do
@@ -12,7 +11,7 @@ RSpec.describe 'card title' do
     description  text "
     card_title = Mattermost::Wekan::CardTitle.new(text: message)
     expect(card_title.description).to eq('description  text')
-    expect(card_title.author).to eq('centralhardware')
+    expect(card_title.assign_to).to eq(['centralhardware'])
     tags = %w[backlog bug]
     expect(card_title.tag).to eq(tags)
     expect(card_title.title).to eq('title исправить оптимизацию в проекте')

@@ -3,7 +3,8 @@
 module Mattermost
   module Wekan
     class Card
-      vattr_initialize %i[title! board_id! swimlane_id! description! user_id! assign_user_id! list_id! list_name!]
+      vattr_initialize %i[title! board_id! swimlane_id! description! user_id! assignee_id! list_id! list_name!
+                          swimlane_name!]
 
       # https://github.com/wekan/wekan/blob/master/models/cards.js
       def as_card
@@ -19,30 +20,16 @@ module Mattermost
           modifiedAt: date_time,
           dateLastActivity: date_time,
           description: description,
-          assignees: [assign_user_id],
-          spentTime: 0,
-          isOvertime: false,
+          assignees: assignee_id,
           userId: user_id,
-          subtaskSort: -1,
-          vote: {
-            question: '',
-            positive: [],
-            negative: [],
-            end: nil,
-            public: false,
-            allowNonBoardMembers: false
-          },
-          members: [],
           # TODO: insert label with random color
-          labelIds: [],
-          customFields: [],
-          listId: list_id
+          labelIds: []
         }
       end
 
       def as_activity
         {
-          _id: SecureRandom.uuid[0..16],
+          _id: activity_id,
           userId: user_id,
           activityType: 'createCard',
           boardId: board_id,
@@ -53,8 +40,12 @@ module Mattermost
           cardId: card_id,
           cardTitle: title,
           listName: list_name,
-          swimlaneName: 'Default'
+          swimlaneName: swimlane_name
         }
+      end
+
+      def activity_id
+        @activity_id ||= SecureRandom.uuid[0..16]
       end
 
       def card_id

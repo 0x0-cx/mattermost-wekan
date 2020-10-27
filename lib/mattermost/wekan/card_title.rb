@@ -8,29 +8,23 @@ module Mattermost
       vattr_initialize %i[text!]
 
       def title
-        words = title_words.select do |word|
-          !username?(word) && !tag?(word)
-        end
-        words.join(' ')
+        title_words.select do |word|
+          !nickname?(word) && !tag?(word)
+        end.join(' ')
       end
 
       def description
-        text.split("\n\n").at(1).strip
+        text.split("\n\n", 2).last.strip
       end
 
       def tag
-        tags = title_words.select do |word|
-          tag?(word)
-        end
-        tags.map! do |word|
-          word.tr('#', '')
+        title_words.filter_map do |word|
+          word.tr('#', '') if tag?(word)
         end
       end
 
-      def author
-        title_words.select do |word|
-          username?(word)
-        end.first.tr('@', '')
+      def assign_to
+        title_words.filter_map { |word| word.tr('@', '') if nickname?(word) }.take(1)
       end
 
       private
@@ -39,7 +33,7 @@ module Mattermost
         word.start_with?('#')
       end
 
-      def username?(word)
+      def nickname?(word)
         word.start_with?('@')
       end
 

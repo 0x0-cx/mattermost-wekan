@@ -4,8 +4,6 @@ require 'webmock/rspec'
 require 'rack/test'
 
 require_relative '../spec_helper'
-require 'mattermost/wekan/server'
-require 'mattermost/wekan/config'
 require_relative '../test_utils'
 
 RSpec.describe 'Sinatra app' do
@@ -25,7 +23,7 @@ RSpec.describe 'Sinatra app' do
   end
 
   it 'comment on post with non wekan url' do
-    post('/', TestUtils.instance.callback_body('4'), content_type: 'application/json')
+    post('/', TestUtils.instance.callback_body('4'), { 'CONTENT_TYPE' => 'application/json' })
     expect(last_response).to be_ok
     client = Mongo::Client.new
     expect(client[:cards].written?).to eq(false)

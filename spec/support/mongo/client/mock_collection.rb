@@ -47,7 +47,7 @@ module Mongo
                      comment_correct?(element)
                    when 9
                      activity_comment_correct?(element)
-                   when 21
+                   when 14
                      card_correct?(element)
                    when 12
                      activity_card_correct?(element)

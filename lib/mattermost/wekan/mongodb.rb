@@ -38,11 +38,18 @@ module Mattermost
       end
 
       def swimlane_id
-        client[:swimlanes].find({ 'boardId' => config.wekan_board_id, 'title' => 'Default' }).first['_id']
+        id = client[:swimlanes].find({ 'boardId' => config.wekan_board_id,
+                                       'title' => config.wekan_swimlane_name }).first['_id']
+        return unless id
+
+        client[:swimlanes].find({ 'boardId' => config.wekan_board_id, 'archived' => false }).first['_id']
       end
 
       def list_id(title:)
-        client[:lists].find({ 'boardId' => config.wekan_board_id, 'title' => title }).first['_id']
+        id = client[:lists].find({ 'boardId' => config.wekan_board_id, 'title' => title }).first['_id']
+        return unless id
+
+        client[:lists].find({ 'boardId' => config.wekan_board_id, 'archived' => false }).first['_id']
       end
 
       private

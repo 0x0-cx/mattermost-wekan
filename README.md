@@ -4,6 +4,10 @@ simple ruby bot for interact with [wekan-mattermost](https://github.com/lunatic-
 
 just comment wekan-mattermost message and it automataic add to the related wekan card
 
+## NOTE: 
+
+minimum ruby version is 2.7
+
 ## Installation
 
 ```bash

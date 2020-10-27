@@ -1,10 +1,14 @@
 # frozen_string_literal: true
 
 $LOAD_PATH.unshift "#{File.dirname(__FILE__)}/../lib"
+ENV['APP_ENV'] = 'test'
 require 'bundler/setup'
-Bundler.require('test')
+Bundler.require(:test)
 
 require 'support/mongo/client/mock_collection'
+require 'mattermost/wekan/server'
+require 'mattermost/wekan/config'
+require 'mattermost/wekan/card_title'
 
 module Mongo
   class Client

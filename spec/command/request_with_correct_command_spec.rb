@@ -4,8 +4,6 @@ require 'rack/test'
 
 require_relative './../spec_helper'
 require_relative './../test_utils'
-require 'mattermost/wekan/server'
-require 'mattermost/wekan/config'
 
 RSpec.describe 'commands webhook' do
   include Rack::Test::Methods
@@ -27,8 +25,8 @@ RSpec.describe 'commands webhook' do
 
     description  text "
     post('/command',
-         user_id: 1, text: message, token: TestUtils.instance.config.mattermost_slash_token,
-         content_type: 'application/json')
+         { user_id: '1', text: message, token: TestUtils.instance.config.mattermost_token, command: '/wi' }.to_json,
+         { 'CONTENT_TYPE' => 'application/json' })
     expect(last_response).to be_ok
     client = Mongo::Client.new
     expect(client[:cards].correct?).to eq(true)

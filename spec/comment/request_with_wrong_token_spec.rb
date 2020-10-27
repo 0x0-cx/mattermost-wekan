@@ -4,8 +4,6 @@ require 'webmock/rspec'
 require 'rack/test'
 
 require_relative '../spec_helper'
-require 'mattermost/wekan/server'
-require 'mattermost/wekan/config'
 require_relative '../test_utils'
 
 RSpec.describe 'Sinatra app' do
@@ -20,7 +18,7 @@ RSpec.describe 'Sinatra app' do
   end
 
   it 'request with wrong token' do
-    post('/', TestUtils.instance.callback_body(1, 'wrong token'), content_type: 'application/json')
+    post('/', TestUtils.instance.callback_body(1, 'wrong token'), { 'CONTENT_TYPE' => 'application/json' })
     expect(last_response.status).to eq(400)
     client = Mongo::Client.new
     expect(client[:cards].written?).to eq(false)

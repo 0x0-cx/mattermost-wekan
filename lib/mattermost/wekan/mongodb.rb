@@ -47,17 +47,17 @@ module Mattermost
 
       private
 
+      # rubocop:disable Style/RedundantSort
       def default_swimlane
-        swimlanes = client[:swimlanes].find({ 'boardId' => config.wekan_board_id, 'archived' => false })
-                                      .sort('sort' => 1)
-        swimlanes.first
+        client[:swimlanes].find({ 'boardId' => config.wekan_board_id, 'archived' => false })
+                          .sort('sort' => 1).first
       end
 
       def default_list
-        lists = client[:lists].find({ 'boardId' => config.wekan_board_id, 'archived' => false })
-                              .sort('sort' => 1)
-        lists.first
+        client[:lists].find({ 'boardId' => config.wekan_board_id, 'archived' => false })
+                      .sort('sort' => 1).first
       end
+      # rubocop:enable Style/RedundantSort
 
       def insert_card(card:)
         config.logger.debug({ card: card }.inspect)

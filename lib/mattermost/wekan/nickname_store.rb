@@ -22,10 +22,7 @@ module Mattermost
       end
 
       def fetch_user_id(username)
-        user_data = fetch_user_data(username)
-        return unless user_data
-
-        user_data['id']
+        fetch_user_data(username)['id']
       end
 
       def fetch_user_data(username)
@@ -33,7 +30,7 @@ module Mattermost
                            nil,
                            { 'Authorization' => "Bearer #{config.mattermost_bot_token}" })
         config.logger.debug({ resp: resp }.inspect)
-        return unless resp.success?
+        return {} unless resp.success?
 
         JSON.parse(resp.body)
       end

@@ -7,8 +7,6 @@ require 'concurrent'
 module Mattermost
   module Wekan
     class NicknameStore
-      class NickNameCacheError < StandardError; end
-
       vattr_initialize [:config!], cache: Concurrent::Hash.new
 
       def wekan_user_id(username:)
@@ -18,10 +16,7 @@ module Mattermost
       private
 
       def mattermost_user_id(username)
-        return cache[username] if cache.include?(username)
-
-        cache[username] = fetch_user_id(username)
-        raise NickNameCacheError
+        cache[username] ||= fetch_user_id(username)
       end
 
       def fetch_user_id(username)

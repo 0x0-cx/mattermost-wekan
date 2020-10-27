@@ -7,7 +7,9 @@ require 'concurrent'
 module Mattermost
   module Wekan
     class NicknameStore
-      vattr_initialize [:config!], cache: Concurrent::Hash.new
+      vattr_initialize [:config!, :cache] do
+        @cache ||= Concurrent::Hash.new
+      end
 
       def wekan_user_id(username:)
         config.user_map[mattermost_user_id(username)]
@@ -20,14 +22,14 @@ module Mattermost
       end
 
       def fetch_user_id(username)
-        user_data = fetch_user_data(username)
+        user_data = username.map { |u| fetch_user_data(u) }.compact.at(0)
         return unless user_data
 
         user_data['id']
       end
 
       def fetch_user_data(username)
-        resp = Faraday.get("#{config.mattermost_url}/api/v4/users/username/#{username[0]}",
+        resp = Faraday.get("#{config.mattermost_url}/api/v4/users/username/#{username}",
                            nil,
                            { 'Authorization' => "Bearer #{config.mattermost_bot_token}" })
         config.logger.debug({ resp: resp }.inspect)

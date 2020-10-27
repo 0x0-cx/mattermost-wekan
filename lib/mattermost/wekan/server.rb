@@ -14,7 +14,7 @@ require 'mattermost/wekan/card'
 module Mattermost
   module Wekan
     class Server < Sinatra::Base
-      attr_reader :config, :mongodb, :nickname
+      attr_reader :config, :mongodb, :nickname_store
 
       use Rack::JSONBodyParser
       use Middleware::TokenValidator
@@ -24,7 +24,7 @@ module Mattermost
 
         @config = params.fetch(:config, Config.new)
         @config.logger.info 'start mattermost-wekan'
-        @nickname = NicknameStore.new(config: @config)
+        @nickname_store = NicknameStore.new(config: @config)
         @mongodb = Mongodb.new(config)
         @mongodb.connect
       end
@@ -36,15 +36,14 @@ module Mattermost
       NO_LINK = 'no link to wekan card found'
 
       post '/' do
-        data = request.params
-        message = Message.new(post_id: data['post_id'], config: config)
+        message = Message.new(post_id: request.params['post_id'], config: config)
         config.logger.debug({ message: message }.inspect)
         make_response(code: 200, message: NO_LINK) unless message.should_send_to_wekan?
 
         insert_result = mongodb.inject_comment(card_id: message.card_id,
                                                board_id: message.board_id,
-                                               comment_text: data['text'],
-                                               user_id: config.user_map[data['user_id']])
+                                               comment_text: request.params['text'],
+                                               user_id: config.user_map[request.params['user_id']])
         make_response(message: MONGO_ERROR, code: 500) unless insert_result
 
         make_response(message: SUCCESS_MESSAGE, code: 200)
@@ -65,9 +64,9 @@ module Mattermost
           board_id: config.wekan_board_id,
           user_id: config.user_map[@params['user_id']],
           swimlane_name: config.wekan_swimlane_name,
-          swimlane_id: mongodb.swimlane_id,
-          list_id: mongodb.list_id(title: COMMAND_2_COLUMN[@params['command']]),
-          assignee_id: nickname.wekan_user_id(username: card_title.assign_to),
+          swimlane_id: mongodb.find_swimlane_by['_id'],
+          list_id: mongodb.find_list_by(title: COMMAND_2_COLUMN[@params['command']])['_id'],
+          assignee_ids: nickname_store.wekan_user_id(username: card_title.assign_to),
           list_name: COMMAND_2_COLUMN[@params['command']]
         )
         make_response(message: MONGO_ERROR, code: 500) unless mongodb.inject_card(card)

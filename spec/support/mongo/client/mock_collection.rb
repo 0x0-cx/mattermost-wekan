@@ -13,7 +13,7 @@ module Mongo
       end
 
       def find(*)
-        [{ 'listId' => 1, 'swimlaneId' => 2, '_id' => 'sdf' }]
+        [{ 'listId' => 1, 'swimlaneId' => 2, '_id' => 'sdf', 'title' => 'title' }]
       end
 
       def insert_one(element)
@@ -66,7 +66,6 @@ module Mongo
           element[:activityType].eql?('addComment') &&
           element[:boardId].eql?('12') &&
           element[:cardId].eql?('13') &&
-          element[:listId].eql?(1) &&
           element[:swimlaneId].eql?(2)
       end
 
@@ -75,8 +74,7 @@ module Mongo
           element[:boardId].eql?('45') &&
           element[:type].eql?('cardType-card') &&
           element[:description].eql?('description  text') &&
-          element[:userId].eql?('1') &&
-          element[:listId].eql?('sdf')
+          element[:userId].eql?('1')
       end
 
       def activity_card_correct?(element)

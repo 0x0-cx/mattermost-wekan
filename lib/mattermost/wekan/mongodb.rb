@@ -37,22 +37,25 @@ module Mattermost
         insert_card(card: card) && insert_activity(activity: card.as_activity)
       end
 
-      def swimlane_id
-        id = client[:swimlanes].find({ 'boardId' => config.wekan_board_id,
-                                       'title' => config.wekan_swimlane_name }).first['_id']
-        return unless id
-
-        client[:swimlanes].find({ 'boardId' => config.wekan_board_id, 'archived' => false }).first['_id']
+      def find_swimlane_by(title: config.wekan_swimlane_name)
+        client[:swimlanes].find({ 'boardId' => config.wekan_board_id, 'title' => title }).first || default_swimlane
       end
 
-      def list_id(title:)
-        id = client[:lists].find({ 'boardId' => config.wekan_board_id, 'title' => title }).first['_id']
-        return unless id
-
-        client[:lists].find({ 'boardId' => config.wekan_board_id, 'archived' => false }).first['_id']
+      def find_list_by(title:)
+        client[:lists].find({ 'boardId' => config.wekan_board_id, 'title' => title }).first || default_list
       end
 
       private
+
+      def default_swimlane
+        client[:swimlanes].find({ 'boardId' => config.wekan_board_id, 'archived' => false })
+                          .min_by { |element| element['title'] }
+      end
+
+      def default_list
+        client[:lists].find({ 'boardId' => config.wekan_board_id, 'archived' => false })
+                      .min_by { |element| element['title'] }
+      end
 
       def insert_card(card:)
         config.logger.debug({ card: card }.inspect)

@@ -48,13 +48,15 @@ module Mattermost
       private
 
       def default_swimlane
-        client[:swimlanes].find({ 'boardId' => config.wekan_board_id, 'archived' => false })
-                          .min_by { |element| element['title'] }
+        swimlanes = client[:swimlanes].find({ 'boardId' => config.wekan_board_id, 'archived' => false })
+                                      .sort('sort' => 1)
+        swimlanes.first
       end
 
       def default_list
-        client[:lists].find({ 'boardId' => config.wekan_board_id, 'archived' => false })
-                      .min_by { |element| element['title'] }
+        lists = client[:lists].find({ 'boardId' => config.wekan_board_id, 'archived' => false })
+                              .sort('sort' => 1)
+        lists.first
       end
 
       def insert_card(card:)

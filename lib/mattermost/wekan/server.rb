@@ -36,14 +36,14 @@ module Mattermost
       NO_LINK = 'no link to wekan card found'
 
       post '/' do
-        message = Message.new(post_id: request.params['post_id'], config: config)
+        message = Message.new(post_id: @params['post_id'], config: config)
         config.logger.debug({ message: message }.inspect)
         make_response(code: 200, message: NO_LINK) unless message.should_send_to_wekan?
 
         insert_result = mongodb.inject_comment(card_id: message.card_id,
                                                board_id: message.board_id,
-                                               comment_text: request.params['text'],
-                                               user_id: config.user_map[request.params['user_id']])
+                                               comment_text: @params['text'],
+                                               user_id: config.user_map[@params['user_id']])
         make_response(message: MONGO_ERROR, code: 500) unless insert_result
 
         make_response(message: SUCCESS_MESSAGE, code: 200)
@@ -66,7 +66,7 @@ module Mattermost
           swimlane_name: config.wekan_swimlane_name,
           swimlane_id: mongodb.find_swimlane_by['_id'],
           list_id: mongodb.find_list_by(title: COMMAND_2_COLUMN[@params['command']])['_id'],
-          assignee_ids: nickname_store.wekan_user_id(username: card_title.assign_to),
+          assignee_ids: card_title.assign_to.map { |username| nickname_store.wekan_user_id(username: username) },
           list_name: COMMAND_2_COLUMN[@params['command']]
         )
         make_response(message: MONGO_ERROR, code: 500) unless mongodb.inject_card(card)

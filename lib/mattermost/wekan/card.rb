@@ -12,8 +12,8 @@ module Mattermost
           _id: card_id,
           title: title,
           boardId: board_id,
-          sort: 0,
           swimlaneId: swimlane_id,
+          sort: 0,
           type: 'cardType-card',
           archived: false,
           createdAt: date_time,
@@ -23,7 +23,8 @@ module Mattermost
           assignees: assignee_ids,
           userId: user_id,
           # TODO: insert label with random color
-          labelIds: []
+          labelIds: [],
+          listId: list_id
         }
       end
 

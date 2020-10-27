@@ -17,7 +17,7 @@ module Mattermost
         WRONG_TOKEN_MESSAGE = 'token from request header not equal with configured token'
 
         def call(env)
-          body = env[Rack::RACK_REQUEST_FORM_HASH]
+          body = Rack::Request.new(env).POST
           return response(HELP_MESSAGE) unless body
 
           app.config.logger.debug({ request_body: body }.inspect)

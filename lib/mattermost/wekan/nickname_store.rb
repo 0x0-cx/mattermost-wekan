@@ -22,7 +22,7 @@ module Mattermost
       end
 
       def fetch_user_id(username)
-        user_data = username.map { |u| fetch_user_data(u) }.compact.at(0)
+        user_data = fetch_user_data(username)
         return unless user_data
 
         user_data['id']

@@ -60,15 +60,15 @@ module Mattermost
       post '/command' do
         card_title = CardTitle.new(text: @params['text'])
         card = Card.new(
-            title: card_title.title,
-            description: card_title.description,
-            board_id: config.wekan_board_id,
-            user_id: config.user_map[@params['user_id']],
-            swimlane_name: config.wekan_swimlane_name,
-            swimlane_id: mongodb.swimlane_id,
-            list_id: mongodb.list_id(title: COMMAND_2_COLUMN[@params['command']]),
-            assignee_id: nickname.wekan_user_id(username: card_title.assign_to),
-            list_name: COMMAND_2_COLUMN[@params['command']]
+          title: card_title.title,
+          description: card_title.description,
+          board_id: config.wekan_board_id,
+          user_id: config.user_map[@params['user_id']],
+          swimlane_name: config.wekan_swimlane_name,
+          swimlane_id: mongodb.swimlane_id,
+          list_id: mongodb.list_id(title: COMMAND_2_COLUMN[@params['command']]),
+          assignee_id: nickname.wekan_user_id(username: card_title.assign_to),
+          list_name: COMMAND_2_COLUMN[@params['command']]
         )
         make_response(message: MONGO_ERROR, code: 500) unless mongodb.inject_card(card)
 

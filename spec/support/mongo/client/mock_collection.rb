@@ -10,16 +10,27 @@ module Mongo
       def initialize
         @correct = true
         @written = false
+        @updated = false
       end
 
       def find(*)
-        [{ 'listId' => 1, 'swimlaneId' => 2, '_id' => 'sdf', 'title' => 'title' }]
+        [{ 'listId' => 1,
+           'swimlaneId' => 2,
+           '_id' => 'sdf',
+           'title' => 'title',
+           'labels' => [{ '_id' => 'saved', 'name' => 'saved' }, { '_id' => 'ed', 'name' => 'second_name' }] }]
       end
 
       def insert_one(element)
         @written = true
         check_correctness(element)
         MockCollection.instance
+      end
+
+      def update_one(_filter, update)
+        @updated = true
+        label = update['$addToSet'][:labels]
+        @correct = label[:name].eql?('backlog')
       end
 
       def successful?
@@ -34,9 +45,14 @@ module Mongo
         @written
       end
 
+      def updated?
+        @updated
+      end
+
       def reset!
         @correct = true
         @written = false
+        @updated = false
       end
 
       private
@@ -47,7 +63,7 @@ module Mongo
                      comment_correct?(element)
                    when 9
                      activity_comment_correct?(element)
-                   when 14
+                   when 15
                      card_correct?(element)
                    when 12
                      activity_card_correct?(element)
@@ -71,16 +87,17 @@ module Mongo
 
       def card_correct?(element)
         element[:title].eql?('title исправить оптимизацию в проекте') &&
-          element[:boardId].eql?('45') &&
+          element[:boardId].eql?('12') &&
           element[:type].eql?('cardType-card') &&
           element[:description].eql?('description  text') &&
-          element[:userId].eql?('1')
+          element[:userId].eql?('1') &&
+          (!element[:labelIds].empty? || element[:labels] == %w[saved new-label])
       end
 
       def activity_card_correct?(element)
         element[:userId].eql?('1') &&
           element[:activityType].eql?('createCard') &&
-          element[:boardId].eql?('45') &&
+          element[:boardId].eql?('12') &&
           element[:swimlaneId].eql?('sdf') &&
           element[:listId].eql?('sdf') &&
           element[:cardTitle].eql?('title исправить оптимизацию в проекте')

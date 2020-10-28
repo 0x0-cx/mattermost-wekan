@@ -17,7 +17,7 @@ module Mattermost
         text.split("\n\n", 2).last.strip
       end
 
-      def tag
+      def tags
         title_words.filter_map do |word|
           word.tr('#', '') if tag?(word)
         end

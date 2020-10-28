@@ -10,6 +10,7 @@ require 'mattermost/wekan/middleware/token_validator'
 require 'mattermost/wekan/nickname_store'
 require 'mattermost/wekan/card_title'
 require 'mattermost/wekan/card'
+require 'mattermost/wekan/label'
 
 module Mattermost
   module Wekan
@@ -61,13 +62,18 @@ module Mattermost
         card = Card.new(
           title: card_title.title,
           description: card_title.description,
-          board_id: config.wekan_board_id,
+          assignee_ids: card_title.assign_to.map { |username| nickname_store.wekan_user_id(username: username) },
+          board_id: config.channel2board[@params['channel_id']],
           user_id: config.user_map[@params['user_id']],
           swimlane_name: config.wekan_swimlane_name,
-          swimlane_id: mongodb.find_swimlane_by['_id'],
-          list_id: mongodb.find_list_by(title: COMMAND_2_COLUMN[@params['command']])['_id'],
-          assignee_ids: card_title.assign_to.map { |username| nickname_store.wekan_user_id(username: username) },
-          list_name: COMMAND_2_COLUMN[@params['command']]
+          swimlane_id: mongodb.find_swimlane_by(board_id: config.channel2board[@params['channel_id']])['_id'],
+          list_id: mongodb.find_list_by(title: COMMAND_2_COLUMN[@params['command']],
+                                        board_id: config.channel2board[@params['channel_id']])['_id'],
+          list_name: COMMAND_2_COLUMN[@params['command']],
+          label_ids: card_title.tags.filter_map do |tag|
+            mongodb.upsert_label(label: Label.new(name: tag),
+                                 board_id: config.channel2board[@params['channel_id']])['_id']
+          end
         )
         make_response(message: MONGO_ERROR, code: 500) unless mongodb.inject_card(card)
 

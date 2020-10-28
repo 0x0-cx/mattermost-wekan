@@ -46,7 +46,9 @@ class TestUtils
       'DEBUG' => 'false',
       'WEKAN_BOARD_ID' => '45',
       'LOG_LEVEL' => '3',
-      'MATTERMOST_SLASH_TOKEN' => 'slash_token'
+      'MATTERMOST_CHANNEL_LIST' => 'channel',
+      'WEKAN_BOARD_LIST' => '12'
+
     }
   end
 end

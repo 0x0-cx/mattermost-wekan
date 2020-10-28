@@ -4,7 +4,7 @@ module Mattermost
   module Wekan
     class Card
       vattr_initialize %i[title! board_id! swimlane_id! description! user_id! assignee_ids! list_id! list_name!
-                          swimlane_name!]
+                          swimlane_name! label_ids!]
 
       # https://github.com/wekan/wekan/blob/master/models/cards.js
       def as_card
@@ -22,8 +22,7 @@ module Mattermost
           description: description,
           assignees: assignee_ids,
           userId: user_id,
-          # TODO: insert label with random color
-          labelIds: [],
+          labelIds: label_ids,
           listId: list_id
         }
       end

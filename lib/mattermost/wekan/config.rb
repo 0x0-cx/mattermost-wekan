@@ -29,10 +29,6 @@ module Mattermost
         @env.fetch('WEKAN_URL')
       end
 
-      def wekan_board_id
-        @env.fetch('WEKAN_BOARD_ID')
-      end
-
       def wekan_swimlane_name
         @env.fetch('WEKAN_SWIMLANE_NAME', 'Default')
       end
@@ -43,6 +39,10 @@ module Mattermost
 
       def user_map
         Hash[mattermost_user_list.zip(wekan_user_list)]
+      end
+
+      def channel2board
+        Hash[mattermost_channel_list.zip(wekan_board_list)]
       end
 
       def logger
@@ -57,6 +57,14 @@ module Mattermost
 
       def log_level
         @env['LOG_LEVEL']&.to_i
+      end
+
+      def mattermost_channel_list
+        @env.fetch('MATTERMOST_CHANNEL_LIST').split(' ')
+      end
+
+      def wekan_board_list
+        @env.fetch('WEKAN_BOARD_LIST').split(' ')
       end
 
       def wekan_user_list

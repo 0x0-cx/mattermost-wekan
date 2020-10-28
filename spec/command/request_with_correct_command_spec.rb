@@ -21,15 +21,17 @@ RSpec.describe 'commands webhook' do
   end
 
   it 'request with correct command' do
-    message = "title @alex  исправить   #backlog     оптимизацию @afgan0r в проекте #bug
+    message = "title @alex  исправить   #saved     оптимизацию @afgan0r в проекте #new-label
 
     description  text "
     post('/command',
-         { user_id: '1', text: message, token: TestUtils.instance.config.mattermost_token, command: '/wi' }.to_json,
+         { user_id: '1', text: message, token: TestUtils.instance.config.mattermost_token, command: '/wi',
+           channel_id: 'channel' }.to_json,
          { 'CONTENT_TYPE' => 'application/json' })
     expect(last_response).to be_ok
     client = Mongo::Client.new
     expect(client[:cards].correct?).to eq(true)
     expect(client[:cards].written?).to eq(true)
+    expect(client[:cards].updated?).to eq(true)
   end
 end

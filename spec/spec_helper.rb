@@ -9,6 +9,7 @@ require 'support/mongo/client/mock_collection'
 require 'mattermost/wekan/server'
 require 'mattermost/wekan/config'
 require 'mattermost/wekan/card_title'
+require 'mattermost/wekan/label'
 
 module Mongo
   class Client
@@ -21,6 +22,16 @@ module Mongo
         swimlanes: MockCollection.instance,
         lists: MockCollection.instance
       }
+    end
+  end
+end
+
+module Mattermost
+  module Wekan
+    class Label
+      def new_id
+        'new_label'
+      end
     end
   end
 end

@@ -37,27 +37,43 @@ module Mattermost
         insert_card(card: card) && insert_activity(activity: card.as_activity)
       end
 
-      def find_swimlane_by(title: config.wekan_swimlane_name)
-        client[:swimlanes].find({ 'boardId' => config.wekan_board_id, 'title' => title }).first || default_swimlane
+      def upsert_label(label:, board_id:)
+        board = client[:boards].find({ '_id' => board_id }).first
+        return {} unless board
+
+        board['labels'].find { |val| val['name'] == label.name } ||
+          insert_label(label: label.as_label, board_id: board_id)
       end
 
-      def find_list_by(title:)
-        client[:lists].find({ 'boardId' => config.wekan_board_id, 'title' => title }).first || default_list
+      def find_swimlane_by(board_id:, title: config.wekan_swimlane_name)
+        client[:swimlanes].find({ 'boardId' => config.channel2board[board_id], 'title' => title }).first ||
+          default_swimlane(board_id: board_id)
+      end
+
+      def find_list_by(title:, board_id:)
+        client[:lists].find({ 'boardId' => board_id, 'title' => title }).first ||
+          default_list(board_id: board_id)
       end
 
       private
 
       # rubocop:disable Style/RedundantSort
-      def default_swimlane
-        client[:swimlanes].find({ 'boardId' => config.wekan_board_id, 'archived' => false })
+      def default_swimlane(board_id:)
+        client[:swimlanes].find({ 'boardId' => board_id, 'archived' => false })
                           .sort('sort' => 1).first
       end
 
-      def default_list
-        client[:lists].find({ 'boardId' => config.wekan_board_id, 'archived' => false })
+      def default_list(board_id:)
+        client[:lists].find({ 'boardId' => board_id, 'archived' => false })
                       .sort('sort' => 1).first
       end
       # rubocop:enable Style/RedundantSort
+
+      def insert_label(label:, board_id:)
+        config.logger.debug({ label: label }.inspect)
+        client[:boards].update_one({ _id: board_id }, { '$addToSet' => { labels: label } })
+        label
+      end
 
       def insert_card(card:)
         config.logger.debug({ card: card }.inspect)

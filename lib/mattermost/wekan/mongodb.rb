@@ -42,17 +42,17 @@ module Mattermost
         return {} unless board
 
         board['labels'].find { |val| val['name'] == label.name } ||
-          insert_label(label: label.as_label, board_id: board_id)
+            insert_label(label: label.as_label, board_id: board_id)
       end
 
       def find_swimlane_by(board_id:, title: config.wekan_swimlane_name)
         client[:swimlanes].find({ 'boardId' => config.channel2board[board_id], 'title' => title }).first ||
-          default_swimlane(board_id: board_id)
+            default_swimlane(board_id: board_id)
       end
 
       def find_list_by(title:, board_id:)
         client[:lists].find({ 'boardId' => board_id, 'title' => title }).first ||
-          default_list(board_id: board_id)
+            default_list(board_id: board_id)
       end
 
       private
@@ -60,12 +60,16 @@ module Mattermost
       # rubocop:disable Style/RedundantSort
       def default_swimlane(board_id:)
         client[:swimlanes].find({ 'boardId' => board_id, 'archived' => false })
-                          .sort('sort' => 1).first
+            .sort('sort' => 1).first
       end
 
       def default_list(board_id:)
         client[:lists].find({ 'boardId' => board_id, 'archived' => false })
-                      .sort('sort' => 1).first
+            .sort('sort' => 1).first
+      end
+
+      def find_first_card_by(list_id:)
+        client[:cards].find({ 'listId' => list_id }).sort('sort' => 1).first
       end
       # rubocop:enable Style/RedundantSort
 
@@ -75,9 +79,13 @@ module Mattermost
         label
       end
 
+      def min_sort_by(list_id:)
+        find_first_card_by(list_id: list_id)['sort'] || 0
+      end
+
       def insert_card(card:)
         config.logger.debug({ card: card }.inspect)
-        client[:cards].insert_one(card.as_card).successful?
+        client[:cards].insert_one(card.as_card(sort: min_sort_by(list_id: card.list_id) - 1)).successful?
       end
 
       def insert_card_comment(comment:)

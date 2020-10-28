@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'singleton'
+require_relative 'mock_array'
 
 module Mongo
   class Client
@@ -14,11 +15,12 @@ module Mongo
       end
 
       def find(*)
-        [{ 'listId' => 1,
-           'swimlaneId' => 2,
-           '_id' => 'sdf',
-           'title' => 'title',
-           'labels' => [{ '_id' => 'saved', 'name' => 'saved' }, { '_id' => 'ed', 'name' => 'second_name' }] }]
+        MockArray.new [{ 'listId' => 1,
+                         'swimlaneId' => 2,
+                         '_id' => 'sdf',
+                         'title' => 'title',
+                         'labels' => [{ '_id' => 'saved', 'name' => 'saved' },
+                                      { '_id' => 'ed', 'name' => 'second_name' }] }]
       end
 
       def insert_one(element)

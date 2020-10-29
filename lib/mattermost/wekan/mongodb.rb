@@ -69,7 +69,7 @@ module Mattermost
       end
 
       def find_first_card_by(list_id:)
-        client[:cards].find({ 'listId' => list_id }).sort('sort' => 1).first
+        client[:cards].find({ 'listId' => list_id }).sort('sort' => 1).first || {}
       end
       # rubocop:enable Style/RedundantSort
 
@@ -85,7 +85,7 @@ module Mattermost
 
       def insert_card(card:)
         config.logger.debug({ card: card }.inspect)
-        client[:cards].insert_one(card.as_card(sort: min_sort_by(list_id: card.list_id) - 1)).successful?
+        client[:cards].insert_one(card.as_card.merge(sort: min_sort_by(list_id: card.list_id) - 1)).successful?
       end
 
       def insert_card_comment(comment:)

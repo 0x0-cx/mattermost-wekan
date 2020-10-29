@@ -7,13 +7,13 @@ module Mattermost
                           swimlane_name! label_ids!]
 
       # https://github.com/wekan/wekan/blob/master/models/cards.js
-      def as_card(sort:)
+      def as_card
         {
           _id: card_id,
           title: title,
           boardId: board_id,
           swimlaneId: swimlane_id,
-          sort: sort,
+          sort: 0,
           type: 'cardType-card',
           archived: false,
           createdAt: date_time,

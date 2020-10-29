@@ -4,26 +4,29 @@ require 'rspec'
 
 require_relative '../spec_helper'
 
-RSpec.describe 'card title' do
-  it 'correct command' do
-    message = "title @centralhardware  исправить   #backlog     оптимизацию @afgan0r в проекте #bug
-
+RSpec.describe Mattermost::Wekan::CardTitle do
+  subject { Mattermost::Wekan::CardTitle.new(text: message) }
+  let(:tags) { %w[bar baz] }
+  context 'with correct command' do
+    let(:message) do
+      "title @alice  lorem   #bar     ipsum @bob dolor #baz\n
     description  text "
-    card_title = Mattermost::Wekan::CardTitle.new(text: message)
-    expect(card_title.description).to eq('description  text')
-    expect(card_title.assign_to).to eq(['centralhardware'])
-    tags = %w[backlog bug]
-    expect(card_title.tags).to eq(tags)
-    expect(card_title.title).to eq('title исправить оптимизацию в проекте')
+    end
+    it 'work' do
+      expect(subject.description).to eq('description  text')
+      expect(subject.assign_to).to eq(['alice'])
+      expect(subject.tags).to eq(tags)
+      expect(subject.title).to eq('title lorem ipsum dolor')
+    end
   end
 
-  it 'without description' do
-    message = 'title @centralhardware  исправить   #backlog     оптимизацию @afgan0r в проекте #bug'
-    card_title = Mattermost::Wekan::CardTitle.new(text: message)
-    expect(card_title.description).to eq('')
-    expect(card_title.assign_to).to eq(['centralhardware'])
-    tags = %w[backlog bug]
-    expect(card_title.tags).to eq(tags)
-    expect(card_title.title).to eq('title исправить оптимизацию в проекте')
+  context 'without description' do
+    let(:message) { 'title @alice  lorem   #bar     ipsum @bob dolor #baz' }
+    it 'has empty description' do
+      expect(subject.description).to eq('')
+      expect(subject.assign_to).to eq(['alice'])
+      expect(subject.tags).to eq(tags)
+      expect(subject.title).to eq('title lorem ipsum dolor')
+    end
   end
 end

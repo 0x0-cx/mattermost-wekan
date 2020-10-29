@@ -16,4 +16,14 @@ RSpec.describe 'card title' do
     expect(card_title.tags).to eq(tags)
     expect(card_title.title).to eq('title исправить оптимизацию в проекте')
   end
+
+  it 'without description' do
+    message = 'title @centralhardware  исправить   #backlog     оптимизацию @afgan0r в проекте #bug'
+    card_title = Mattermost::Wekan::CardTitle.new(text: message)
+    expect(card_title.description).to eq('')
+    expect(card_title.assign_to).to eq(['centralhardware'])
+    tags = %w[backlog bug]
+    expect(card_title.tags).to eq(tags)
+    expect(card_title.title).to eq('title исправить оптимизацию в проекте')
+  end
 end

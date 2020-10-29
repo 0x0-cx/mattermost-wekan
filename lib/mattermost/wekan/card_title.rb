@@ -14,10 +14,7 @@ module Mattermost
       end
 
       def description
-        description = text.split("\n\n", 2)[1]
-        return '' unless description
-
-        description.strip
+        text.split("\n\n", 2)[1].to_s.strip
       end
 
       def tags

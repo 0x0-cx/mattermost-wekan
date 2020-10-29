@@ -35,6 +35,7 @@ module Mattermost
       MONGO_ERROR = 'failed to insert comment to mongodb'
       SUCCESS_MESSAGE = 'successfully handle comment'
       NO_LINK = 'no link to wekan card found'
+      NO_TITLE = 'no title giving'
 
       post '/' do
         message = Message.new(post_id: @params['post_id'], config: config)
@@ -75,9 +76,16 @@ module Mattermost
                                  board_id: config.channel2board[@params['channel_id']])['_id']
           end
         )
+        chat_answer(NO_TITLE) if card.title.empty?
+
         make_response(message: MONGO_ERROR, code: 500) unless mongodb.inject_card(card)
 
         make_response(message: SUCCESS_MESSAGE, code: 200)
+      end
+
+      def chat_answer(message)
+        config.logger.info({ chat_answer: message }.inspect)
+        halt(200, nil, message)
       end
 
       def make_response(code:, message:)

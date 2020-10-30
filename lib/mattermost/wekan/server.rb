@@ -78,9 +78,9 @@ module Mattermost
         )
         chat_answer(NO_TITLE) if card.title.empty?
 
-        make_response(message: MONGO_ERROR, code: 500) unless mongodb.inject_card(card)
+        chat_answer(MONGO_ERROR) unless mongodb.inject_card(card)
 
-        make_response(message: SUCCESS_MESSAGE, code: 200)
+        chat_answer(SUCCESS_MESSAGE)
       end
 
       def chat_answer(message)

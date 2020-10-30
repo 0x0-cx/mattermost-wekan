@@ -2,7 +2,7 @@
 
 require 'rspec'
 
-require_relative '../spec_helper'
+require_relative '../../spec_helper'
 
 RSpec.describe Mattermost::Wekan::CardTitle do
   subject { Mattermost::Wekan::CardTitle.new(text: message) }

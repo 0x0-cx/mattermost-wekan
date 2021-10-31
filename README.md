@@ -1,5 +1,7 @@
 # Mattermost::Wekan
 
+[![CI](https://github.com/0x0-cx/mattermost-wekan/actions/workflows/ruby.yml/badge.svg)](https://github.com/0x0-cx/mattermost-wekan/actions/workflows/ruby.yml)
+
 simple ruby bot for interact with [wekan-mattermost](https://github.com/lunatic-cat/wekan-mattermost)
 
 just comment wekan-mattermost message and it automataic add to the related wekan card
